@@ -1,134 +1,134 @@
-/* ---------- GLOBAL STYLES ---------- */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Poppins",sans-serif;
 }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #ffe4ec, #ffd6e7, #ffc2db);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    overflow-y: auto;
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#ffe4ec,#ffc2db);
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
 }
 
-/* Main Content Container */
-.container {
-    padding: 20px;
-    max-width: 400px;
-    width: 90%;
+.container{
+padding:20px;
+max-width:420px;
+width:90%;
 }
 
-/* ---------- GIF STYLING ---------- */
-
-.valentine-gif {
-    width: 70%;
-    max-width: 280px;
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 20px;
+/* Video Styling */
+.valentine-gif{
+width:75%;
+max-width:300px;
+border-radius:20px;
+margin-bottom:20px;
+will-change:transform;
 }
 
-/* ---------- INTRO TEXT ---------- */
-
-.caption,
-#typing-text {
-    font-size: 18px;
-    color: #b03060;
-    font-weight: 500;
-    min-height: 50px;
+/* Intro Text */
+#typing-text{
+font-size:18px;
+color:#b03060;
+min-height:50px;
 }
 
-/* ---------- PROPOSAL BUTTONS ---------- */
+/* Proposal Page */
+.question{
+color:#b03060;
+margin-bottom:10px;
+}
 
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    margin-top: 25px;
+#convince-text{
+color:#cc4b7a;
+margin-bottom:10px;
 }
 
 /* Proposal Buttons */
-.yes-btn,
-.no-btn {
-    width: 160px;
-    height: 52px;
-    border: none;
-    border-radius: 30px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.3s ease;
+.buttons{
+display:flex;
+justify-content:center;
+gap:18px;
+margin-top:20px;
 }
 
-/* YES Button */
-.yes-btn {
-    background-color: #ff8fab;   /* deeper pastel pink */
-    color: white;
+.yes-btn,.no-btn{
+width:160px;
+height:52px;
+border:none;
+border-radius:30px;
+font-size:16px;
+color:white;
+cursor:pointer;
+transition:.3s;
 }
 
-.yes-btn:hover {
-    background-color: #ff6f91;
-    transform: scale(1.08);
+.yes-btn{
+background:#ff8fab;
 }
 
-/* NO Button */
-.no-btn {
-    background-color: #cdb4db;   /* pastel lavender */
-    color: white;
-    position: relative;
+.no-btn{
+background:#cdb4db;
+position:relative;
 }
 
-.no-btn:hover {
-    background-color: #b497d6;
-    transform: scale(1.08);
+.yes-btn:hover,.no-btn:hover{
+transform:scale(1.08);
 }
 
-
-/* ---------- MENU PAGE BUTTONS ---------- */
-
-.menu-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    margin-top: 15px;
+/* Menu Page */
+.menu-caption{
+color:#b03060;
+margin-bottom:15px;
 }
 
-/* Bigger + Neatly Organized Menu Buttons */
-.menu-btn {
-    width: 300px;
-    height: 60px;
-    border: none;
-    border-radius: 30px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.3s ease;
-    color: white;
+.menu-buttons{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:18px;
 }
 
-/* Individual Colors For Menu Buttons */
-
-.menu-btn:nth-child(1) {
-    background-color: #ff8fab;   /* pink */
+.menu-btn{
+width:300px;
+height:60px;
+border:none;
+border-radius:30px;
+font-size:16px;
+color:white;
+cursor:pointer;
+transition:.3s;
 }
 
-.menu-btn:nth-child(2) {
-    background-color: #cdb4db;   /* lavender */
+.menu-btn:nth-child(1){
+background:#ff8fab;
 }
 
-.menu-btn:nth-child(3) {
-    background-color: #90dbf4;   /* pastel blue */
+.menu-btn:nth-child(2){
+background:#cdb4db;
 }
 
-/* Hover Animation */
-.menu-btn:hover {
-    transform: scale(1.05);
-    filter: brightness(95%);
+.menu-btn:nth-child(3){
+background:#90dbf4;
+}
+
+.menu-btn:hover{
+transform:scale(1.05);
+}
+
+/* Mobile */
+@media(max-width:480px){
+
+.menu-btn{
+width:90%;
+height:55px;
+}
+
+.yes-btn,.no-btn{
+width:135px;
+height:48px;
+}
 }
