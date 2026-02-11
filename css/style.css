@@ -1,47 +1,63 @@
-body {
+/* ---------- GLOBAL STYLES ---------- */
+
+* {
     margin: 0;
-    height: 100vh;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffe4ec, #ffd6e7, #ffc2db);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ffd1dc, #ffe4ec, #ffc0cb);
+    overflow-y: auto;
 }
 
+/* Main Content Container */
 .container {
     padding: 20px;
+    max-width: 400px;
+    width: 90%;
 }
+
+/* ---------- GIF STYLING ---------- */
 
 .valentine-gif {
-    width: 300px;
-    max-width: 80vw;
-    border-radius: 20px;
+    width: 70%;
+    max-width: 280px;
+    height: auto;
     margin-bottom: 20px;
+    border-radius: 20px;
 }
 
-.caption {
-    font-size: 1.3rem;
+/* ---------- INTRO TEXT ---------- */
+
+.caption,
+#typing-text {
+    font-size: 18px;
     color: #b03060;
+    font-weight: 500;
+    min-height: 50px;
 }
 
-.caption::after {
-    content: "|";
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% { opacity: 0; }
-}
+/* ---------- PROPOSAL PAGE ---------- */
 
 .question {
     color: #b03060;
+    margin-bottom: 15px;
 }
 
-.buttons {
-    margin-top: 20px;
+#convince-text {
+    color: #cc4b7a;
+    margin-bottom: 10px;
+    min-height: 25px;
 }
 
+/* Button Row */
 .buttons {
     display: flex;
     justify-content: center;
@@ -49,26 +65,94 @@ body {
     margin-top: 20px;
 }
 
-/* SAME STYLE FOR BOTH BUTTONS */
-.yes-btn, .no-btn {
+/* SAME STYLE FOR YES + NO BUTTON */
+.yes-btn,
+.no-btn {
     width: 140px;
     height: 45px;
     border: none;
     border-radius: 25px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #ffd6e7;   /* pastel pink */
+    background-color: #ffd6e7;
     color: #b03060;
     transition: 0.3s ease;
 }
 
-/* Hover effect */
-.yes-btn:hover, .no-btn:hover {
+.yes-btn:hover,
+.no-btn:hover {
     background-color: #ffc2db;
     transform: scale(1.05);
 }
 
-/* Keep NO button movable */
+/* Needed for NO button movement */
 .no-btn {
     position: relative;
+}
+
+/* ---------- MENU PAGE ---------- */
+
+.menu-caption {
+    color: #b03060;
+    margin-bottom: 20px;
+}
+
+/* Menu Buttons Container */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Menu Buttons */
+.menu-btn {
+    width: 260px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    background-color: #ffd6e7;
+    color: #b03060;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.menu-btn:hover {
+    background-color: #ffc2db;
+    transform: scale(1.05);
+}
+
+/* ---------- SCROLLBAR STYLING ---------- */
+
+.menu-buttons::-webkit-scrollbar {
+    width: 6px;
+}
+
+.menu-buttons::-webkit-scrollbar-thumb {
+    background: #ffc2db;
+    border-radius: 10px;
+}
+
+/* ---------- MOBILE RESPONSIVE ---------- */
+
+@media (max-width: 480px) {
+
+    .valentine-gif {
+        width: 80%;
+    }
+
+    .menu-btn {
+        width: 90%;
+    }
+
+    .yes-btn,
+    .no-btn {
+        width: 120px;
+    }
+
 }
