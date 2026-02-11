@@ -1,19 +1,25 @@
-const message = "You’re my favorite hello and my sweetest forever 💖✨";
-const typingElement = document.getElementById("typing-text");
+window.addEventListener("DOMContentLoaded", () => {
 
-let index = 0;
+    const message = "You’re my favorite hello and my sweetest forever 💖✨";
+    const typingElement = document.getElementById("typing-text");
 
-function typeEffect() {
-    if (index < message.length) {
-        typingElement.textContent += message.charAt(index);
-        index++;
-        setTimeout(typeEffect, 60);
-    } else {
-        // After text finishes → go to proposal page
-        setTimeout(() => {
-            window.location.href = "proposal.html";
-        }, 1500);
+    let index = 0;
+
+    function typeEffect() {
+        if (index < message.length) {
+            typingElement.textContent += message.charAt(index);
+            index++;
+            setTimeout(typeEffect, 60);
+        } else {
+
+            // Automatically change page after typing ends
+            setTimeout(() => {
+                window.location.replace("proposal.html");
+            }, 1500);
+
+        }
     }
-}
 
-typeEffect();
+    typeEffect();
+
+});
