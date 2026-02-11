@@ -42,21 +42,33 @@ body {
     margin-top: 20px;
 }
 
-button {
-    padding: 12px 25px;
-    margin: 10px;
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* SAME STYLE FOR BOTH BUTTONS */
+.yes-btn, .no-btn {
+    width: 140px;
+    height: 45px;
     border: none;
     border-radius: 25px;
     font-size: 16px;
     cursor: pointer;
+    background-color: #ffd6e7;   /* pastel pink */
+    color: #b03060;
+    transition: 0.3s ease;
 }
 
-.yes-btn {
-    background-color: #ff4b6e;
-    color: white;
+/* Hover effect */
+.yes-btn:hover, .no-btn:hover {
+    background-color: #ffc2db;
+    transform: scale(1.05);
 }
 
+/* Keep NO button movable */
 .no-btn {
-    background-color: #ddd;
     position: relative;
 }
