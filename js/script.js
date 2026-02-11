@@ -8,6 +8,11 @@ function typeEffect() {
         typingElement.textContent += message.charAt(index);
         index++;
         setTimeout(typeEffect, 60);
+    } else {
+        // After text finishes → go to proposal page
+        setTimeout(() => {
+            window.location.href = "proposal.html";
+        }, 1500);
     }
 }
 
