@@ -151,13 +151,13 @@ height:48px;
 /* Memory Images */
 .memory-img{
     width:100%;
-    max-width:650px;
+    max-width:650px;   /* Increased size */
     border-radius:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
 
     opacity:0;
     animation:fadeIn 1.5s ease forwards;
 }
+
 
 
 /* Back Button */
