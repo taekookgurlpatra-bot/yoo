@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melodies 💗</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container melodies-container">
+
+<h1 class="melodies-heading">
+Melodies that scream YOU 💗🫵🏻
+</h1>
+
+<p class="melodies-desc">
+Songs that remind me of you 🎧💞✨
+</p>
+
+<!-- SONG 1 -->
+<div class="song-card">
+
+<img src="assets/song-images/song1.jpg" class="song-img">
+
+<div class="player">
+
+<p class="song-title">Barbaad</p>
+
+<audio id="song1" src="assets/songs/song1.mp3"></audio>
+
+<input type="range" value="0" class="progress" id="progress1">
+
+<button class="play-btn" onclick="toggleSong('song1','progress1', this)">
+▶
+</button>
+
+</div>
+</div>
+
+<!-- SONG 2 -->
+<div class="song-card">
+
+<img src="assets/song-images/song2.jpg" class="song-img">
+
+<div class="player">
+
+<p class="song-title">Yeh Raatein Yeh Mausam</p>
+
+<audio id="song2" src="assets/songs/song2.mp3"></audio>
+
+<input type="range" value="0" class="progress" id="progress2">
+
+<button class="play-btn" onclick="toggleSong('song2','progress2', this)">
+▶
+</button>
+
+</div>
+</div>
+
+<!-- SONG 3 -->
+<div class="song-card">
+
+<img src="assets/song-images/song3.jpg" class="song-img">
+
+<div class="player">
+
+<p class="song-title">Sanam Re</p>
+
+<audio id="song3" src="assets/songs/song3.mp3"></audio>
+
+<input type="range" value="0" class="progress" id="progress3">
+
+<button class="play-btn" onclick="toggleSong('song3','progress3', this)">
+▶
+</button>
+
+</div>
+</div>
+
+<button class="back-btn" onclick="window.location.href='menu.html'">
+⬅ Back
+</button>
+
+</div>
+
+<script src="js/melodies.js" defer></script>
+
+</body>
+</html>
