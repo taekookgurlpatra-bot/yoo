@@ -24,10 +24,15 @@ width:90%;
 .valentine-gif{
 width:75%;
 max-width:300px;
+height:auto;
 border-radius:20px;
 margin-bottom:20px;
-will-change:transform;
+transform:translateZ(0);
+
+opacity:0;
+animation:fadeIn 1.5s ease forwards;
 }
+
 
 /* Intro Text */
 #typing-text{
