@@ -1,3 +1,14 @@
-// Reserved for future animations or button interactions
+const text = "You’re my favorite hello and my sweetest forever 💖✨";
+const typingElement = document.getElementById("typing-text");
 
-console.log("Valentine site loaded ❤️");
+let index = 0;
+
+function typeText() {
+    if (index < text.length) {
+        typingElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeText, 60);
+    }
+}
+
+typeText();
