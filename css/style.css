@@ -44,115 +44,91 @@ body {
     min-height: 50px;
 }
 
-/* ---------- PROPOSAL PAGE ---------- */
+/* ---------- PROPOSAL BUTTONS ---------- */
 
-.question {
-    color: #b03060;
-    margin-bottom: 15px;
-}
-
-#convince-text {
-    color: #cc4b7a;
-    margin-bottom: 10px;
-    min-height: 25px;
-}
-
-/* Button Row */
 .buttons {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 18px;
+    margin-top: 25px;
 }
 
-/* SAME STYLE FOR YES + NO BUTTON */
+/* Proposal Buttons */
 .yes-btn,
 .no-btn {
-    width: 140px;
-    height: 45px;
+    width: 160px;
+    height: 52px;
     border: none;
-    border-radius: 25px;
+    border-radius: 30px;
     font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
-    background-color: #ffd6e7;
-    color: #b03060;
     transition: 0.3s ease;
 }
 
-.yes-btn:hover,
-.no-btn:hover {
-    background-color: #ffc2db;
-    transform: scale(1.05);
+/* YES Button */
+.yes-btn {
+    background-color: #ff8fab;   /* deeper pastel pink */
+    color: white;
 }
 
-/* Needed for NO button movement */
+.yes-btn:hover {
+    background-color: #ff6f91;
+    transform: scale(1.08);
+}
+
+/* NO Button */
 .no-btn {
+    background-color: #cdb4db;   /* pastel lavender */
+    color: white;
     position: relative;
 }
 
-/* ---------- MENU PAGE ---------- */
-
-.menu-caption {
-    color: #b03060;
-    margin-bottom: 20px;
+.no-btn:hover {
+    background-color: #b497d6;
+    transform: scale(1.08);
 }
 
-/* Menu Buttons Container */
+
+/* ---------- MENU PAGE BUTTONS ---------- */
+
 .menu-buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
-
-    max-height: 260px;
-    overflow-y: auto;
-    padding-right: 5px;
+    gap: 18px;
+    margin-top: 15px;
 }
 
-/* Menu Buttons */
+/* Bigger + Neatly Organized Menu Buttons */
 .menu-btn {
-    width: 260px;
-    height: 50px;
+    width: 300px;
+    height: 60px;
     border: none;
-    border-radius: 25px;
-    background-color: #ffd6e7;
-    color: #b03060;
-    font-size: 15px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
     transition: 0.3s ease;
+    color: white;
 }
 
+/* Individual Colors For Menu Buttons */
+
+.menu-btn:nth-child(1) {
+    background-color: #ff8fab;   /* pink */
+}
+
+.menu-btn:nth-child(2) {
+    background-color: #cdb4db;   /* lavender */
+}
+
+.menu-btn:nth-child(3) {
+    background-color: #90dbf4;   /* pastel blue */
+}
+
+/* Hover Animation */
 .menu-btn:hover {
-    background-color: #ffc2db;
     transform: scale(1.05);
-}
-
-/* ---------- SCROLLBAR STYLING ---------- */
-
-.menu-buttons::-webkit-scrollbar {
-    width: 6px;
-}
-
-.menu-buttons::-webkit-scrollbar-thumb {
-    background: #ffc2db;
-    border-radius: 10px;
-}
-
-/* ---------- MOBILE RESPONSIVE ---------- */
-
-@media (max-width: 480px) {
-
-    .valentine-gif {
-        width: 80%;
-    }
-
-    .menu-btn {
-        width: 90%;
-    }
-
-    .yes-btn,
-    .no-btn {
-        width: 120px;
-    }
-
+    filter: brightness(95%);
 }
