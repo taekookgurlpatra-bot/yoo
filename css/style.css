@@ -1,4 +1,3 @@
-/* Page Layout */
 body {
     margin: 0;
     height: 100vh;
@@ -11,13 +10,11 @@ body {
     background: linear-gradient(135deg, #ffd1dc, #ffe4ec, #ffc0cb);
 }
 
-/* Container */
 .container {
     padding: 20px;
     max-width: 90%;
 }
 
-/* GIF Styling */
 .valentine-gif {
     width: 320px;
     max-width: 80vw;
@@ -26,14 +23,13 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Caption */
 .caption {
     margin-top: 20px;
     font-size: 1.3rem;
     color: #b03060;
 }
 
-/* Blinking Cursor */
+/* Blinking cursor */
 .caption::after {
     content: "|";
     margin-left: 5px;
