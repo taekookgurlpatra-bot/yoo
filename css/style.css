@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
 *{
 margin:0;
 padding:0;
@@ -200,4 +202,12 @@ height:48px;
 
     font-size:16px;
     font-weight:500;
+}
+
+/* Memories Heading */
+.memories-heading{
+    font-family: "Dancing Script", cursive;
+    font-size: 32px;
+    color:#d63384;
+    margin-bottom:20px;
 }
