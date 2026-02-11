@@ -1,32 +1,27 @@
 const noBtn = document.getElementById("noBtn");
 const convinceText = document.getElementById("convince-text");
 
-const messages = [
-    "C’mon 😭",
-    "Are you sure qt? 🥺",
-    "Think again 💕",
-    "I’ll be sad 😢",
-    "You know you want to 😉",
-    "Pleaseeeee 💖"
+const messages=[
+"C’mon 😭",
+"Are you sure qt? 🥺",
+"Think again 💕",
+"I’ll be sad 😢",
+"You know you want to 😉"
 ];
 
-// Make NO button run away
-noBtn.addEventListener("mouseover", () => {
+noBtn.addEventListener("mouseover",()=>{
 
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 200 - 100;
+const x=Math.random()*200-100;
+const y=Math.random()*200-100;
 
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+noBtn.style.transform=`translate3d(${x}px,${y}px,0)`;
 
-    const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-    convinceText.textContent = randomMsg;
+const randomMsg=messages[Math.floor(Math.random()*messages.length)];
+convinceText.textContent=randomMsg;
+
 });
 
-
-// YES button popup → Menu Page
-function sayYes() {
-
-    alert("YAYYYY 💕 I knew you would say yes!!!");
-
-    window.location.href = "menu.html";
+function sayYes(){
+alert("YAYYYY 💕 I knew you would say yes!!!");
+window.location.href="menu.html";
 }
