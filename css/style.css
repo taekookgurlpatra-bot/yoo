@@ -8,7 +8,6 @@ body {
     text-align: center;
     font-family: 'Segoe UI', sans-serif;
 
-    /* Soft Pink Gradient */
     background: linear-gradient(135deg, #ffd1dc, #ffe4ec, #ffc0cb);
 }
 
@@ -17,7 +16,6 @@ body {
     max-width: 90%;
 }
 
-/* GIF Styling */
 .valentine-gif {
     width: 320px;
     max-width: 80vw;
@@ -26,15 +24,13 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Caption */
 .caption {
     margin-top: 20px;
     font-size: 1.3rem;
     color: #b03060;
-    line-height: 1.6;
 }
 
-/* Typing cursor */
+/* Blinking cursor */
 .caption::after {
     content: "|";
     animation: blink 1s infinite;
@@ -47,7 +43,6 @@ body {
     100% { opacity: 1; }
 }
 
-/* Mobile Responsive */
 @media (max-width: 600px) {
 
     .valentine-gif {
