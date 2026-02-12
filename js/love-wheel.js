@@ -1,29 +1,32 @@
-const wheel = document.getElementById("wheel");
-const spinBtn = document.getElementById("spinBtn");
-const sound = document.getElementById("spinSound");
+const card = document.getElementById("card");
+const button = document.getElementById("drawBtn");
+const sound = document.getElementById("cardSound");
 
-let spinning = false;
+const fortunes = [
 
-spinBtn.onclick = () => {
+"Take a cute selfie together 📸",
+"Say 3 things you love about each other ❤️",
+"Send a romantic text right now 💌",
+"Draw a heart for your partner 💖",
+"Give a virtual hug 🤗",
+"Sing one romantic song line 🎶",
+"Share your favourite memory together ✨",
+"Tell a secret crush moment 😳"
 
-if(spinning) return;
+];
 
-spinning = true;
+button.onclick = () => {
 
-/* RANDOM ROTATION */
-let randomDeg = 3600 + Math.floor(Math.random()*360);
+let random = fortunes[Math.floor(Math.random()*fortunes.length)];
 
-/* APPLY SPIN */
-wheel.style.transform = `rotate(${randomDeg}deg)`;
+card.classList.add("flip");
 
-/* PLAY SOUND */
 sound.currentTime = 0;
 sound.play();
 
-/* STOP SOUND AFTER 14 SEC */
 setTimeout(()=>{
-sound.pause();
-spinning = false;
-},14000);
+card.innerText = random;
+card.classList.remove("flip");
+},300);
 
 };
