@@ -2,140 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💌 Plan Our Perfect Date</title>
-<link rel="stylesheet" href="../css/style.css">
-<style>
-body,html{margin:0;padding:0;font-family:"Poppins",sans-serif;}
-#planner-background{
-  width:100%; min-height:100vh;
-  background: linear-gradient(135deg,#ffe4ec,#ffc2db);
-  display:flex; justify-content:center; align-items:center; position:relative;
-}
-#instructions{
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  z-index:10; background:#fff0f5; border:2px solid #ffc2db;
-  padding:35px 30px; border-radius:20px; text-align:center;
-  max-width:380px; font-family:'Dancing Script',cursive;color:#6b216b;
-}
-#instructions h2{font-size:28px;margin-bottom:15px;}
-#instructions p{font-size:18px;line-height:1.5;}
-#startGame{margin-top:15px;padding:12px 25px;font-size:18px;border:none;border-radius:15px;background:#ff8fab;color:white;cursor:pointer;}
-#startGame:hover{transform:scale(1.08);}
-.blurred{filter:blur(5px);pointer-events:none;}
-#question-container{text-align:center;width:90%; display:none; margin-top:20px;}
-#question{font-size:24px;font-weight:bold;margin-bottom:20px;color:#6b216b;}
-.option-btn{display:block;margin:12px auto;padding:15px 20px;border-radius:20px;border:none;cursor:pointer;background:#d8b4fe;color:white;font-size:20px;width:80%; max-width:350px;transition:0.3s;}
-.option-btn:hover{background:#a78bfa;}
-#result-container{text-align:center;display:none;margin-top:30px;}
-#result-title{font-size:32px;font-weight:bold;color:#6b21a8;font-family:'Dancing Script',cursive;margin-bottom:15px;}
-#result-desc{font-size:20px;color:#4b0082;}
-#controls{position:absolute;top:20px;right:20px;display:flex;gap:10px;z-index:5;}
-#controls button{padding:10px 15px;border-radius:10px;cursor:pointer;background:#d8b4fe;color:white;border:none;font-weight:600;transition:0.3s;}
-#controls button:hover{transform:scale(1.05);}
-#backBtn{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);}
-</style>
+<title>Plan Our Perfect Date</title>
+
+<link rel="stylesheet" href="../css/date-planner.css">
 </head>
+
 <body>
 
-<div id="game-container">
-  <div id="planner-background">
+<h1 class="title">🌸 Plan Our Perfect Date 🌸</h1>
 
-    <div id="question-container">
-      <div id="question"></div>
-      <button class="option-btn" id="opt0"></button>
-      <button class="option-btn" id="opt1"></button>
-      <button class="option-btn" id="opt2"></button>
-      <button class="option-btn" id="opt3"></button>
-    </div>
+<!-- GAME BOX -->
+<div class="game-box">
 
-    <div id="result-container">
-      <div id="result-title"></div>
-      <div id="result-desc"></div>
-    </div>
-
-  </div>
-
-  <!-- Instructions overlay -->
-  <div id="instructions">
-    <h2>💖 Plan Our Perfect Date 💖</h2>
-    <p>Answer 10 fun questions 🎀💌 so we can find the cutest date plan for us 🌸🥰!</p>
-    <button id="startGame">Okay! 💗</button>
-  </div>
-
-  <!-- Controls & Back -->
-  <div id="controls">
-    <button id="pauseBtn">Pause</button>
-    <button id="instructionsBtn">Instructions</button>
-  </div>
-  <button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
+<div id="questionBox">
+<h2 id="question"></h2>
+<div id="options"></div>
 </div>
 
-<script src="../js/game-common.js"></script>
-<script>
-const questions=[
-{q:"Favorite way to spend time together online?",a:["Voice call 🎤","Play games 🎮","Watch movie 🎬","Chat randomly 💌"]},
-{q:"Preferred weather for a date?",a:["Sunny 🌞","Rainy 🌧️","Snowy ❄️","Starry 🌌"]},
-{q:"Pick a color theme for our date.",a:["Red ❤️","Pink 💗","Lavender 💜","Gold ✨"]},
-{q:"Food for our date?",a:["Chocolate 🍫","Pizza 🍕","Ice cream 🍦","Sushi 🍣"]},
-{q:"Fun activity?",a:["Beach walk 🏖️","Movie night 🎥","Picnic 🧺","Stargazing ✨"]},
-{q:"Music for the date?",a:["Romantic 🎵","Pop 🎶","Jazz 🎷","Silence 🌙"]},
-{q:"Pick a surprise gift.",a:["Flowers 🌹","Letter 💌","Teddy 🧸","Chocolates 🍫"]},
-{q:"Best time?",a:["Morning 🌞","Afternoon 🌼","Evening 🌇","Night 🌙"]},
-{q:"Cute element?",a:["Candles 🕯️","Fairy lights ✨","Balloon 🎈","Confetti 🎉"]},
-{q:"Sweet memory to relive?",a:["First voice call 🎤","First text 💌","First gift 🎁","First joke 😂"]}
-];
-const datePlans=[
-{name:"Beach Date 🏖️",desc:"Grab snacks and a blanket, enjoy waves & sunset together."},
-{name:"Movie Night 🎥",desc:"Snuggle up with your favorite film and popcorn."},
-{name:"Picnic 🧺",desc:"Spread a blanket, enjoy treats and talk under the sky."},
-{name:"Stargazing ✨",desc:"Lay back, gaze at stars, share secrets and dreams."}
-];
+</div>
 
-let answers=[],currentQ=0,gamePaused=false;
+<!-- RESULT POPUP -->
+<div id="resultPopup" class="popup hidden">
 
-function startDatePlanner(){
-  document.getElementById('question-container').style.display='block';
-  document.getElementById('instructions').style.display='none';
-  showQuestion();
-}
+<div class="popup-box">
 
-function showQuestion(){
-  if(currentQ>=questions.length) return showResult();
-  const q=questions[currentQ];
-  document.getElementById('question').innerText=q.q;
-  for(let i=0;i<4;i++){
-    const btn=document.getElementById('opt'+i);
-    btn.innerText=q.a[i];
-    btn.onclick=()=>{
-      answers.push(i);
-      currentQ++;
-      showQuestion();
-    };
-  }
-}
+<h2 id="resultTitle"></h2>
+<p id="resultRemark"></p>
 
-function showResult(){
-  document.getElementById('question-container').style.display='none';
-  document.getElementById('result-container').style.display='block';
-  let sum=answers.reduce((a,b)=>a+b,0);
-  let planIndex=sum%datePlans.length;
-  let plan=datePlans[planIndex];
-  document.getElementById('result-title').innerText=plan.name;
-  document.getElementById('result-desc').innerText=plan.desc;
-}
+<button onclick="restartGame()">Play Again 💖</button>
+<button onclick="goBack()">← Back</button>
 
-document.getElementById('pauseBtn').addEventListener('click',()=>{
-  gamePaused=!gamePaused;
-  document.getElementById('pauseBtn').innerText=gamePaused?'Play':'Pause';
-});
+</div>
 
-document.getElementById('instructionsBtn').addEventListener('click',()=>{
-  document.getElementById('instructions').style.display='block';
-  document.getElementById('planner-background').classList.add('blurred');
-});
+</div>
 
-initGame('planner-background', startDatePlanner);
-</script>
+<a href="../funzone.html" class="back-btn">← Back</a>
+
+<script src="../js/date-planner.js"></script>
+
 </body>
 </html>
