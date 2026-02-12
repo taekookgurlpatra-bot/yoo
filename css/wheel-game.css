@@ -1,114 +1,96 @@
 body{
-margin:0;
-background:linear-gradient(135deg,#ffe4ec,#ffc2db);
-font-family:Poppins;
-display:flex;
-flex-direction:column;
-align-items:center;
+background:linear-gradient(to bottom,#d7a8b3,#e3bcc5);
+font-family:Georgia, serif;
+text-align:center;
 }
 
-.title{
-color:#d63384;
-margin-top:20px;
+h1{
+color:#cc2f75;
+margin-top:30px;
 }
 
 .game-box{
-background:white;
-width:320px;
-height:430px;
-margin-top:20px;
-border-radius:30px;
-display:flex;
-flex-direction:column;
-align-items:center;
+width:300px;
+height:420px;
+background:#eee;
+margin:40px auto;
+border-radius:25px;
+box-shadow:0 0 20px rgba(0,0,0,0.1);
 padding-top:20px;
-box-shadow:0 0 20px rgba(0,0,0,0.2);
+position:relative;
 }
 
+/* SPIN BUTTON */
+
 #spinBtn{
-padding:12px 30px;
+padding:12px 40px;
+background:#f47c9b;
 border:none;
-border-radius:25px;
-background:#ff8fab;
+border-radius:30px;
 color:white;
 font-size:18px;
 cursor:pointer;
+margin-bottom:20px;
 }
 
-.wheel-wrapper{
-position:relative;
-margin-top:20px;
+/* POINTER */
+
+.pointer{
+width:0;
+height:0;
+border-left:15px solid transparent;
+border-right:15px solid transparent;
+border-bottom:25px solid #ff4f7b;
+margin:10px auto;
 }
+
+/* WHEEL */
 
 .wheel{
-width:260px;
-height:260px;
+width:220px;
+height:220px;
 border-radius:50%;
+margin:0 auto;
 position:relative;
 
 background:conic-gradient(
-#ffc8dd 0deg 60deg,
-#cdb4db 60deg 120deg,
-#bde0fe 120deg 180deg,
-#caffbf 180deg 240deg,
-#ffe5b4 240deg 300deg,
-#ffd6e0 300deg 360deg
+#f4c2c2 0deg 60deg,
+#c2d4f4 60deg 120deg,
+#d4c2f4 120deg 180deg,
+#c2f4d6 180deg 240deg,
+#f4e1c2 240deg 300deg,
+#f4c2e2 300deg 360deg
 );
 
-transition:transform 14s cubic-bezier(0.15,0.85,0.25,1);
+transition:transform 14s cubic-bezier(0.1,0.7,0.1,1);
 }
+
+/* TEXT INSIDE WHEEL */
 
 .wheel span{
 position:absolute;
 left:50%;
 top:50%;
 transform-origin:0 0;
+
 transform:
 rotate(calc(var(--i)*60deg))
-translate(100px)
+translate(85px)
 rotate(90deg);
 
-font-size:14px;
+font-size:13px;
 font-weight:bold;
 color:#444;
 }
 
-.pointer{
-position:absolute;
-top:-15px;
-left:50%;
-transform:translateX(-50%);
-border-left:12px solid transparent;
-border-right:12px solid transparent;
-border-bottom:25px solid #ff4d6d;
-}
+/* BACK BUTTON */
 
-.back-btn{
+.back{
+display:inline-block;
 margin-top:20px;
-padding:12px 25px;
-border:none;
-border-radius:25px;
-background:#cdb4db;
+padding:10px 25px;
+background:#bfa3c9;
 color:white;
-cursor:pointer;
-}
-
-.popup{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:none;
-justify-content:center;
-align-items:center;
-background:rgba(0,0,0,0.5);
-}
-
-.popup-box{
-background:white;
-padding:25px;
-border-radius:25px;
-text-align:center;
-width:260px;
+border-radius:20px;
+text-decoration:none;
 }
