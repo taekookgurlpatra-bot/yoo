@@ -17,17 +17,21 @@ let isPaused = false;
 let basketPos = gameContainer.offsetWidth / 2 - 30; // initial center
 const basketSpeed = 15;
 
-document.addEventListener('keydown', (e) => {
-    if(e.key === 'ArrowLeft') moveBasket(-basketSpeed);
-    if(e.key === 'ArrowRight') moveBasket(basketSpeed);
-});
-
-function moveBasket(delta) {
-    basketPos += delta;
-    if (basketPos < 0) basketPos = 0;
-    if (basketPos > gameContainer.offsetWidth - 60) basketPos = gameContainer.offsetWidth - 60;
+// Mouse/touch inside the game box
+gameContainer.addEventListener('mousemove', function(e){
+    basketPos = e.offsetX - basket.offsetWidth/2;
+    if(basketPos < 0) basketPos = 0;
+    if(basketPos > gameContainer.offsetWidth - basket.offsetWidth) basketPos = gameContainer.offsetWidth - basket.offsetWidth;
     basket.style.left = basketPos + 'px';
-}
+});
+gameContainer.addEventListener('touchmove', function(e){
+    e.preventDefault();
+    const touchX = e.touches[0].clientX - gameContainer.getBoundingClientRect().left;
+    basketPos = touchX - basket.offsetWidth/2;
+    if(basketPos < 0) basketPos = 0;
+    if(basketPos > gameContainer.offsetWidth - basket.offsetWidth) basketPos = gameContainer.offsetWidth - basket.offsetWidth;
+    basket.style.left = basketPos + 'px';
+}, {passive:false});
 
 // Create hearts
 function createHeart() {
@@ -44,7 +48,7 @@ function createHeart() {
 function moveHearts() {
     hearts.forEach((heart, index) => {
         let top = parseInt(heart.style.top);
-        top += 2 + Math.random()*1; // moderate speed
+        top += 3; // moderate speed
         heart.style.top = top + 'px';
 
         // Check collision with basket
@@ -55,7 +59,6 @@ function moveHearts() {
               heartRect.left > basketRect.right || 
               heartRect.bottom < basketRect.top || 
               heartRect.top > basketRect.bottom)) {
-            // Caught
             score++;
             scoreDisplay.textContent = `Score: ${score}`;
             heart.remove();
@@ -88,7 +91,7 @@ function startGame() {
     isPaused = false;
     gameInterval = setInterval(gameLoop, 20);
 
-    // Generate hearts randomly
+    // Generate hearts
     setInterval(() => {
         if(!isPaused && score < maxScore) createHeart();
     }, 800);
