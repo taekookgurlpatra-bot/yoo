@@ -1,110 +1,87 @@
 const wheel = document.getElementById("wheel");
-const spinBtn = document.getElementById("spin-btn");
-
-const popup = document.getElementById("dare-popup");
-const dareText = document.getElementById("dare-text");
-const instructions = document.getElementById("instructions");
-
-const okBtn = document.getElementById("ok-btn");
-const backBtn = document.getElementById("back-btn");
-
 const tickSound = document.getElementById("tick-sound");
-const gameBox = document.getElementById("game-box");
+const popup = document.getElementById("popup");
+const dareTitle = document.getElementById("dare-title");
+const okBtn = document.getElementById("okBtn");
+const menuBtn = document.getElementById("menuBtn");
 
-let selectedDare = "";
 let spinning = false;
 
 const dares = [
-"Take a selfie 📸",
-"Give 5 compliments 💖",
-"Try Again",
-"Write a love note 💌",
-"Draw a heart ✏️",
-"Draw a cute photo 🎨"
+"Click a cute selfie 💗",
+"Give me 5 sweet compliments 🥺",
+"Draw something that reminds you of us 🎨",
+"Write a tiny love note 💌",
+"Send a random cute photo 📸",
+"TRY AGAIN !!"
 ];
 
-spinBtn.addEventListener("click",()=>{
+function spinWheel(){
 
 if(spinning) return;
-
 spinning = true;
 
-/* Play tick sound */
 tickSound.currentTime = 0;
+tickSound.volume = 0.8;
+tickSound.playbackRate = 1;
 tickSound.play();
 
-const segment = 360/dares.length;
-const randomIndex = Math.floor(Math.random()*dares.length);
+const randomRotation = 360*6 + Math.floor(Math.random()*360);
 
-selectedDare = dares[randomIndex];
+wheel.style.transform = `rotate(${randomRotation}deg)`;
 
-const spins = 5 + Math.floor(Math.random()*4);
-const degree = spins*360 + randomIndex*segment + segment/2;
-
-wheel.style.transform = `rotate(${degree}deg)`;
+setTimeout(slowDownTick,9000);
 
 setTimeout(()=>{
-
-spinning=false;
 tickSound.pause();
+tickSound.currentTime=0;
+spinning=false;
 
-/* Blur background */
-gameBox.classList.add("blur");
+const resultIndex = Math.floor(Math.random()*dares.length);
+showDare(dares[resultIndex]);
 
-if(selectedDare === "Try Again"){
-dareText.innerText="TRY AGAIN !!";
-instructions.style.display="none";
-backBtn.style.display="none";
+},14000);
+
+}
+
+function slowDownTick(){
+
+let interval = setInterval(()=>{
+
+if(tickSound.playbackRate>0.4){
+tickSound.playbackRate -=0.05;
+}
+
+if(tickSound.volume>0.1){
+tickSound.volume -=0.05;
+}else{
+clearInterval(interval);
+}
+
+},300);
+
+}
+
+function showDare(dare){
+
+popup.style.display="flex";
+dareTitle.innerText=dare;
+
+if(dare==="TRY AGAIN !!"){
+okBtn.innerText="Spin Again 💫";
+okBtn.onclick=()=>{
+popup.style.display="none";
+};
 }
 else{
-dareText.innerText=selectedDare;
-instructions.style.display="block";
-backBtn.style.display="inline-block";
+okBtn.innerText="Okay 💖";
+okBtn.onclick=()=>{
+popup.style.display="none";
+};
 }
 
-/* Show popup */
-popup.classList.remove("hidden");
-popup.classList.add("popup-show");
+menuBtn.onclick=()=>{
+location.href="../funzone.html";
+};
 
-/* Launch confetti */
-launchConfetti();
-
-},4000);
-
-});
-
-
-/* OK BUTTON */
-okBtn.addEventListener("click",()=>{
-
-popup.classList.add("hidden");
-gameBox.classList.remove("blur");
-wheel.style.transform="rotate(0deg)";
-
-});
-
-
-/* BACK BUTTON */
-backBtn.addEventListener("click",()=>{
-window.location.href="funzone.html";
-});
-
-
-/* CONFETTI */
-function launchConfetti(){
-
-const container = document.getElementById("confetti-container");
-
-for(let i=0;i<30;i++){
-
-let conf = document.createElement("div");
-conf.classList.add("confetti");
-
-conf.style.left = Math.random()*100+"%";
-conf.style.animationDuration = 2 + Math.random()*2 + "s";
-
-container.appendChild(conf);
-
-setTimeout(()=> conf.remove(),4000);
-}
 }
