@@ -1,133 +1,121 @@
-let hearts = [], score = 0, gamePaused = false, basketX = 150;
-const maxScore = 20;
-const fallSpeed = 2.2; // increased for moderate speed
-
-const container = document.getElementById('game-container');
+// Get DOM elements
+const gameContainer = document.getElementById('game-container');
 const basket = document.getElementById('basket');
-const scoreEl = document.getElementById('score');
-const gameOver = document.getElementById('game-over');
-const okGameOverBtn = document.getElementById('okGameOver');
+const scoreDisplay = document.getElementById('score');
 const instructionsOverlay = document.getElementById('instructions-overlay');
+const startGameBtn = document.getElementById('startGame');
+const gameOverOverlay = document.getElementById('game-over');
+const okGameOverBtn = document.getElementById('okGameOver');
 
-// Create hearts
-function createHeart(){
-  if(score >= maxScore) return;
-
-  const heart = document.createElement('div');
-  heart.classList.add('heart');
-
-  const isGolden = Math.random() < 0.15;
-  heart.innerText = isGolden ? '💛' : '💗';
-  heart.dataset.value = isGolden ? 3 : 1;
-  heart.dataset.golden = isGolden ? 'true' : 'false';
-
-  heart.style.left = Math.random()*(container.clientWidth-30)+'px';
-  heart.style.top = '-30px';
-  container.appendChild(heart);
-  hearts.push(heart);
-}
+let score = 0;
+const maxScore = 20;
+let hearts = [];
+let gameInterval;
+let isPaused = false;
 
 // Basket movement
-function moveBasket(e){
-  if(gamePaused) return;
-  e.preventDefault(); // prevent page scroll on mobile
-  const rect = container.getBoundingClientRect();
-  const x = e.touches ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
-  basketX = x - 30;
-  if(basketX < 0) basketX = 0;
-  if(basketX > container.clientWidth-60) basketX = container.clientWidth-60;
-  basket.style.left = basketX + 'px';
+let basketPos = gameContainer.offsetWidth / 2 - 30; // initial center
+const basketSpeed = 15;
+
+document.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowLeft') moveBasket(-basketSpeed);
+    if(e.key === 'ArrowRight') moveBasket(basketSpeed);
+});
+
+function moveBasket(delta) {
+    basketPos += delta;
+    if (basketPos < 0) basketPos = 0;
+    if (basketPos > gameContainer.offsetWidth - 60) basketPos = gameContainer.offsetWidth - 60;
+    basket.style.left = basketPos + 'px';
 }
 
-// Sparkles
-function createSparkle(x, y){
-  const sparkle = document.createElement('div');
-  sparkle.innerText = '✨';
-  sparkle.style.position = 'absolute';
-  sparkle.style.left = x + Math.random()*20 - 10 + 'px';
-  sparkle.style.top = y + Math.random()*20 - 10 + 'px';
-  sparkle.style.fontSize = 14 + Math.random()*10 + 'px';
-  sparkle.style.opacity = 1;
-  sparkle.style.transition = 'all 0.8s ease-out';
-  container.appendChild(sparkle);
-
-  setTimeout(()=>{
-    sparkle.style.transform = `translateY(-20px)`;
-    sparkle.style.opacity = 0;
-  },10);
-
-  setTimeout(()=>{ container.removeChild(sparkle); },900);
+// Create hearts
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.textContent = '💗';
+    heart.style.left = Math.random() * (gameContainer.offsetWidth - 30) + 'px';
+    heart.style.top = '-30px';
+    gameContainer.appendChild(heart);
+    hearts.push(heart);
 }
 
-// Update hearts
-function updateHearts(){
-  if(gamePaused) return;
-  hearts.forEach((heart,i)=>{
-    let top = parseFloat(heart.style.top);
-    top += fallSpeed; // faster speed
-    heart.style.top = top+'px';
+// Move hearts
+function moveHearts() {
+    hearts.forEach((heart, index) => {
+        let top = parseInt(heart.style.top);
+        top += 2 + Math.random()*1; // moderate speed
+        heart.style.top = top + 'px';
 
-    const heartX = parseFloat(heart.style.left);
-    const heartY = top;
+        // Check collision with basket
+        const basketRect = basket.getBoundingClientRect();
+        const heartRect = heart.getBoundingClientRect();
 
-    if(heartY+30 >= container.clientHeight-60 && heartX+30>basketX && heartX<basketX+60){
-      const points = parseInt(heart.dataset.value);
-      score += points;
-      if(score > maxScore) score = maxScore;
-      scoreEl.innerText = 'Score: '+score;
+        if (!(heartRect.right < basketRect.left || 
+              heartRect.left > basketRect.right || 
+              heartRect.bottom < basketRect.top || 
+              heartRect.top > basketRect.bottom)) {
+            // Caught
+            score++;
+            scoreDisplay.textContent = `Score: ${score}`;
+            heart.remove();
+            hearts.splice(index,1);
+        }
 
-      if(heart.dataset.golden === 'true'){
-        createSparkle(basketX + 30, container.clientHeight-60);
-        createSparkle(basketX + 20, container.clientHeight-50);
-        createSparkle(basketX + 40, container.clientHeight-55);
-      }
+        // Remove heart if falls out
+        if(top > gameContainer.offsetHeight) {
+            heart.remove();
+            hearts.splice(index,1);
+        }
+    });
 
-      container.removeChild(heart);
-      hearts.splice(i,1);
-    } else if(top > container.clientHeight){
-      container.removeChild(heart);
-      hearts.splice(i,1);
-    }
-  });
+    // Check game over
+    if(score >= maxScore) endGame();
+}
 
-  if(score >= maxScore){
-    gameOver.style.display = 'block';
-    return;
-  }
-
-  requestAnimationFrame(updateHearts);
+// Game loop
+function gameLoop() {
+    if(!isPaused) moveHearts();
 }
 
 // Start game
-function startHeartsGame(){
-  instructionsOverlay.style.display = 'none';
-  container.classList.remove('blurred');
-  setInterval(createHeart, 1000); // slightly faster heart generation
-  requestAnimationFrame(updateHearts);
+function startGame() {
+    instructionsOverlay.style.display = 'none';
+    score = 0;
+    scoreDisplay.textContent = `Score: ${score}`;
+    hearts.forEach(h => h.remove());
+    hearts = [];
+    isPaused = false;
+    gameInterval = setInterval(gameLoop, 20);
+
+    // Generate hearts randomly
+    setInterval(() => {
+        if(!isPaused && score < maxScore) createHeart();
+    }, 800);
 }
 
-// Controls
-document.getElementById('startGame').addEventListener('click', startHeartsGame);
-
-document.getElementById('pauseBtn').addEventListener('click',()=>{
-  gamePaused=!gamePaused;
-  document.getElementById('pauseBtn').innerText = gamePaused?'Play':'Pause';
+// Pause / Resume
+const pauseBtn = document.getElementById('pauseBtn');
+pauseBtn.addEventListener('click', () => {
+    isPaused = !isPaused;
+    pauseBtn.textContent = isPaused ? 'Play' : 'Pause';
 });
 
-document.getElementById('instructionsBtn').addEventListener('click', ()=>{
-  instructionsOverlay.style.display = 'flex';
+// Instructions button
+const instructionsBtn = document.getElementById('instructionsBtn');
+instructionsBtn.addEventListener('click', () => {
+    instructionsOverlay.style.display = 'flex';
+    isPaused = true;
 });
 
-// Basket movement with mouse/touch
-container.addEventListener('mousemove', moveBasket);
-container.addEventListener('touchmove', moveBasket, {passive:false});
-
-// Game over OK button
-okGameOverBtn.addEventListener('click', ()=>{
-  gameOver.style.display='none';
-  hearts.forEach(h=>container.removeChild(h));
-  hearts=[];
-  score=0;
-  scoreEl.innerText='Score: 0';
-  instructionsOverlay.style.display='flex';
+// Event listeners
+startGameBtn.addEventListener('click', startGame);
+okGameOverBtn.addEventListener('click', () => {
+    gameOverOverlay.style.display = 'none';
 });
+
+// End game
+function endGame() {
+    isPaused = true;
+    gameOverOverlay.style.display = 'block';
+}
