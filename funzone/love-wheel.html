@@ -7,81 +7,57 @@
 <link rel="stylesheet" href="../css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 <style>
-body { margin:0; font-family:"Poppins",sans-serif; }
-
-/* Game background */
+body, html { margin:0; padding:0; height:100%; font-family:"Poppins",sans-serif; }
 #wheel-background {
-    width:100%;
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    background: linear-gradient(135deg,#bde0fe,#90e0ef);
-    position: relative;
+  width:100%; min-height:100vh;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  background: linear-gradient(135deg,#ffcad4,#ffc2db);
+  position:relative;
+  overflow:hidden;
 }
-
-/* Instructions overlay */
 #instructions {
-  position: absolute;
-  top:50%; left:50%;
-  transform: translate(-50%,-50%);
-  z-index:10;
-  background: #f0f0ff;
-  border: 2px solid #90e0ef;
-  padding: 35px 30px;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-  text-align: center;
-  max-width: 380px;
-  font-family: 'Dancing Script', cursive;
-  color: #204e7a;
-  animation: popIn 0.5s ease;
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  z-index:10; background:#fff0f5; border:2px solid #ffc2db;
+  padding:35px 30px; border-radius:20px; box-shadow:0 8px 25px rgba(0,0,0,0.25);
+  text-align:center; max-width:380px; font-family: 'Dancing Script', cursive; color:#6b216b;
 }
-
 #instructions h2 { font-size:28px; margin-bottom:15px; }
 #instructions p { font-size:18px; line-height:1.5; }
-#startGame { margin-top:15px; padding:12px 25px; font-size:18px; border:none; border-radius:15px; background:#00b4d8; color:white; cursor:pointer; transition:0.3s; }
+#startGame { margin-top:15px; padding:12px 25px; font-size:18px; border:none; border-radius:15px; background:#ff8fab; color:white; cursor:pointer; transition:0.3s; }
 #startGame:hover { transform: scale(1.08); }
-
-/* Game content placeholder */
-#game-container-area { width:100%; min-height:400px; }
-
-/* Controls buttons */
-#controls {
-  position: absolute;
-  top: 20px; right: 20px;
-  display: flex; gap: 10px;
-  z-index: 5;
-}
-#controls button {
-  padding: 10px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  background: #00b4d8;
-  color: white;
-  border: none;
-  font-weight: 600;
-  transition: 0.3s;
-}
-#controls button:hover { transform: scale(1.05); }
-
-/* Back button */
-#backBtn {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Blur effect */
 .blurred { filter: blur(5px); pointer-events:none; }
 
-/* Pop-in animation */
-@keyframes popIn {
-  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+/* Wheel container */
+#wheel-container { position: relative; width:300px; height:300px; margin-top:20px; }
+#wheel { width:100%; height:100%; border-radius:50%; border:5px solid #fff; position:relative; overflow:hidden; transform:rotate(0deg); transition: transform 4s cubic-bezier(0.33,1,0.68,1); background:#ffb6c1; }
+
+/* Pointer */
+#wheel-pointer {
+  position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+  width:0; height:0; border-left:15px solid transparent; border-right:15px solid transparent;
+  border-bottom:30px solid #ff4d6d;
+  z-index:5;
 }
+
+/* Dare overlay */
+#dare-overlay {
+  display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:#fff0f5; border:2px solid #ff8fab; border-radius:20px; padding:30px; max-width:90%;
+  text-align:center; z-index:10;
+}
+#dare-overlay h2 { font-size:24px; margin-bottom:10px; }
+#dare-overlay p { font-size:18px; margin-bottom:15px; }
+#dare-input { width:80%; padding:10px; margin-bottom:10px; border-radius:10px; border:1px solid #ccc; }
+#dare-canvas { border:1px solid #ccc; border-radius:10px; background:white; touch-action: none; }
+#submitDare { padding:10px 20px; background:#ff4d6d; color:white; border:none; border-radius:15px; cursor:pointer; font-size:16px; }
+#submitDare:hover { transform: scale(1.05); }
+
+/* Controls & Back */
+#controls { position:absolute; top:20px; right:20px; display:flex; gap:10px; z-index:5; }
+#controls button { padding:10px 15px; border-radius:10px; cursor:pointer; background:#d8b4fe; color:white; border:none; font-weight:600; transition:0.3s; }
+#controls button:hover { transform:scale(1.05); }
+#backBtn { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); }
+
 </style>
 </head>
 <body>
@@ -90,39 +66,129 @@ body { margin:0; font-family:"Poppins",sans-serif; }
 
   <!-- Game Background -->
   <div id="wheel-background">
-    <div id="game-container-area">
-      <!-- Wheel game placeholder -->
-      <p style="font-size:20px; color:#204e7a;">🎡 Spin the Love Wheel placeholder 🎡</p>
+
+    <div id="wheel-container">
+      <div id="wheel"></div>
+      <div id="wheel-pointer"></div>
     </div>
+
   </div>
 
   <!-- Instructions overlay -->
   <div id="instructions">
-    <h2>💖 Spin The Love Wheel 💖</h2>
-    <p>Click the wheel 🎡 to spin and discover your sweet surprise 💌✨! Try your luck and see what love brings 🎀💗</p>
+    <h2>🎡 Spin The Love Wheel 🎡</h2>
+    <p>Click the wheel to spin and get your cute dare 💖✨!</p>
     <button id="startGame">Okay! 💗</button>
   </div>
 
-  <!-- Controls -->
+  <!-- Dare overlay -->
+  <div id="dare-overlay">
+    <h2 id="dare-title"></h2>
+    <p id="dare-desc"></p>
+    <input type="text" id="dare-input" placeholder="Write here..." style="display:none;">
+    <canvas id="dare-canvas" width="250" height="150" style="display:none;"></canvas>
+    <br>
+    <button id="submitDare">Submit 💌</button>
+  </div>
+
+  <!-- Controls & Back -->
   <div id="controls">
     <button id="pauseBtn">Pause</button>
     <button id="instructionsBtn">Instructions</button>
   </div>
-
-  <!-- Back Button -->
-  <button id="backBtn" class="back-btn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
+  <button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
 
 </div>
 
 <script src="../js/game-common.js"></script>
 <script>
-// Start wheel game placeholder
-function startWheelGame() {
-  document.getElementById('game-container-area').innerHTML = '<p style="font-size:22px; color:#204e7a;">🎡 The Love Wheel is spinning! 🎡</p>';
+// Dare list
+const dares = [
+  { title:"📸 Send a selfie!", desc:"Take a cute selfie 😘 and send it to your love!", type:"text" },
+  { title:"💌 5 Compliments", desc:"Write 5 sweet compliments 💖 for your partner!", type:"text" },
+  { title:"🎶 Share a song", desc:"Share a song 🎵 that reminds you of your love!", type:"text" },
+  { title:"📝 Write a short poem", desc:"Write a tiny poem 📝 (3-4 lines) for your partner!", type:"text" },
+  { title:"🎨 Draw a doodle", desc:"Draw a cute doodle 🎨 and send it!", type:"draw" }
+];
+
+const wheel = document.getElementById("wheel");
+const wheelPointer = document.getElementById("wheel-pointer");
+const dareOverlay = document.getElementById("dare-overlay");
+const dareTitle = document.getElementById("dare-title");
+const dareDesc = document.getElementById("dare-desc");
+const dareInput = document.getElementById("dare-input");
+const dareCanvas = document.getElementById("dare-canvas");
+const submitDare = document.getElementById("submitDare");
+
+let wheelSpinning = false;
+
+// Draw wheel segments visually (optional)
+const segmentCount = dares.length;
+const ctx = document.createElement('canvas').getContext('2d');
+function spinWheel() {
+  if(wheelSpinning) return;
+  wheelSpinning = true;
+  const spinDeg = Math.floor(Math.random()*360) + 720; // 2-3 spins
+  wheel.style.transition = "transform 4s cubic-bezier(0.33,1,0.68,1)";
+  wheel.style.transform = `rotate(${spinDeg}deg)`;
+
+  setTimeout(()=> {
+    wheelSpinning = false;
+    showDare(spinDeg);
+  },4000);
 }
 
-// Initialize
-initGame('wheel-background', startWheelGame);
+function showDare(deg){
+  const segmentAngle = 360 / dares.length;
+  let index = dares.length - 1 - Math.floor((deg%360)/segmentAngle);
+  if(index>=dares.length) index = 0;
+  const dare = dares[index];
+  dareTitle.innerText = dare.title;
+  dareDesc.innerText = dare.desc;
+  dareOverlay.style.display = "block";
+
+  // Show input/draw depending on type
+  dareInput.style.display = dare.type==="text"?"block":"none";
+  dareCanvas.style.display = dare.type==="draw"?"block":"none";
+
+  // Clear canvas
+  if(dare.type==="draw") {
+    const c = dareCanvas.getContext('2d');
+    c.clearRect(0,0,dareCanvas.width,dareCanvas.height);
+    setupDrawing(dareCanvas,c);
+  }
+}
+
+function setupDrawing(canvas, ctx){
+  let drawing = false;
+  function start(e){ drawing=true; draw(e); }
+  function end(){ drawing=false; ctx.beginPath(); }
+  function draw(e){
+    if(!drawing) return;
+    const rect = canvas.getBoundingClientRect();
+    let x = (e.touches ? e.touches[0].clientX : e.clientX)-rect.left;
+    let y = (e.touches ? e.touches[0].clientY : e.clientY)-rect.top;
+    ctx.lineWidth=2; ctx.lineCap="round"; ctx.strokeStyle="#ff4d6d";
+    ctx.lineTo(x,y); ctx.stroke(); ctx.beginPath(); ctx.moveTo(x,y);
+  }
+  canvas.addEventListener('mousedown',start);
+  canvas.addEventListener('mouseup',end);
+  canvas.addEventListener('mousemove',draw);
+  canvas.addEventListener('touchstart',start);
+  canvas.addEventListener('touchend',end);
+  canvas.addEventListener('touchmove',draw);
+}
+
+// Submit button links to Instagram
+submitDare.addEventListener('click',()=>{
+  window.open('https://www.instagram.com/yourusername/', '_blank');
+});
+
+// Spin on wheel click
+wheel.addEventListener('click', spinWheel);
+
+// Initialize instructions overlay
+initGame('wheel-background', ()=>{});
 </script>
 
 </body>
