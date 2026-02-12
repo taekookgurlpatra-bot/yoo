@@ -1,15 +1,11 @@
-window.addEventListener("DOMContentLoaded", () => {
-
 const wheel = document.getElementById("wheel");
 const spinBtn = document.getElementById("spinBtn");
-const popup = document.getElementById("darePopup");
+const popup = document.getElementById("popup");
 const dareText = document.getElementById("dareText");
-const okayBtn = document.getElementById("okayBtn");
-const backBtn = document.getElementById("backBtn");
-
-let currentRotation = 0;
 
 const tickSound = new Audio("../assets/sounds/tick.mp3");
+
+let rotation = 0;
 
 const dares = [
 "Take a cute selfie 📸",
@@ -20,7 +16,7 @@ const dares = [
 "TRY AGAIN"
 ];
 
-spinBtn.addEventListener("click", () => {
+spinBtn.onclick = () => {
 
 spinBtn.disabled = true;
 
@@ -32,34 +28,34 @@ const randomIndex = Math.floor(Math.random()*dares.length);
 const segment = 360 / dares.length;
 const spins = 6;
 
-const finalRotation =
-360*spins +
-(randomIndex*segment) +
-(segment/2);
+rotation += 360*spins + (randomIndex*segment);
 
-currentRotation += finalRotation;
+wheel.style.transform = `rotate(${rotation}deg)`;
 
-wheel.style.transform = `rotate(${currentRotation}deg)`;
-
-/* Stop after 14 sec */
+/* slow sound after 5 sec */
 setTimeout(()=>{
+let fade = setInterval(()=>{
+if(tickSound.volume>0.1){
+tickSound.volume -= 0.05;
+}else{
+clearInterval(fade);
+}
+},300);
+},5000);
+
+/* show dare */
+setTimeout(()=>{
+
 tickSound.pause();
-showDare(dares[randomIndex]);
-spinBtn.disabled = false;
-},14000);
 
-});
+popup.style.display="flex";
 
-function showDare(dare){
-
-popup.style.display = "flex";
-
-if(dare === "TRY AGAIN"){
-dareText.innerHTML = "<h2>TRY AGAIN !!</h2>";
+if(dares[randomIndex] === "TRY AGAIN"){
+dareText.innerHTML="<h2>TRY AGAIN !!</h2>";
 }
 else{
 dareText.innerHTML = `
-<h2>${dare}</h2>
+<h2>${dares[randomIndex]}</h2>
 <p>
 Instructions to complete it:<br>
 1. Take a screenshot 🤭<br>
@@ -69,14 +65,12 @@ Instructions to complete it:<br>
 `;
 }
 
-}
+spinBtn.disabled=false;
 
-okayBtn.onclick = ()=>{
+},14000);
+
+};
+
+function closePopup(){
 popup.style.display="none";
-};
-
-backBtn.onclick = ()=>{
-window.location.href="../funzone.html";
-};
-
-});
+}
