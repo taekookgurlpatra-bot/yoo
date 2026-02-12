@@ -145,3 +145,33 @@ transition:0.3s;
 transform:scale(1.08);
 background:linear-gradient(135deg,#ff85c2,#ff4d88);
 }
+
+/* WRAPPER TO CENTER BUTTON */
+
+.main-back-wrapper{
+width:100%;
+display:flex;
+justify-content:center;
+margin-top:15px;
+}
+
+/* MAIN BACK BUTTON */
+
+.main-back-btn{
+padding:14px 35px;
+font-size:16px;
+border:none;
+border-radius:35px;
+cursor:pointer;
+color:white;
+
+background:linear-gradient(135deg,#ff9ecf,#ff6fa5);
+box-shadow:0 5px 15px rgba(255,111,165,0.4);
+
+transition:0.3s;
+}
+
+.main-back-btn:hover{
+transform:scale(1.08);
+background:linear-gradient(135deg,#ff85c2,#ff4d88);
+}
