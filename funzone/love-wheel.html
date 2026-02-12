@@ -3,22 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spin The Love Wheel</title>
-
+<title>Love Wheel</title>
 <link rel="stylesheet" href="../css/wheel-game.css">
 </head>
 
 <body>
 
-<h1 class="game-title">🎡 Spin The Love Wheel 💗</h1>
+<h1 class="title">🎡 Spin The Love Wheel 💗</h1>
 
 <div class="game-box">
 
 <button id="spinBtn">SPIN 💞</button>
 
-<div class="wheel-container">
+<div class="wheel-wrapper">
 <div class="pointer"></div>
-<img src="../assets/images/love-wheel.png" id="wheel">
+
+<div class="wheel" id="wheel">
+<div class="segment">Selfie 📸</div>
+<div class="segment">Compliments ❤️</div>
+<div class="segment">Cute Photo 🌸</div>
+<div class="segment">Draw Heart 💗</div>
+<div class="segment">Love Note 💌</div>
+<div class="segment">TRY AGAIN</div>
+</div>
+
 </div>
 
 </div>
@@ -27,16 +35,15 @@
 ⬅ Back
 </button>
 
+
 <!-- Dare Popup -->
-<div id="darePopup" class="popup">
+<div class="popup" id="popup">
 <div class="popup-box">
 <div id="dareText"></div>
-<button id="okayBtn">Okay 💗</button>
-<button id="backBtn">Funzone 💌</button>
+<button onclick="closePopup()">Okay 💗</button>
 </div>
 </div>
 
-<script defer src="../js/wheel-game.js"></script>
-
+<script src="../js/wheel-game.js"></script>
 </body>
 </html>
