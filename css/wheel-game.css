@@ -1,10 +1,10 @@
 body{
+margin:0;
 background:linear-gradient(135deg,#ffe4ec,#ffc2db);
 display:flex;
 flex-direction:column;
 align-items:center;
 font-family:Poppins,sans-serif;
-margin:0;
 }
 
 .game-title{
@@ -24,36 +24,35 @@ box-shadow:0 0 20px rgba(0,0,0,0.15);
 display:flex;
 flex-direction:column;
 align-items:center;
-justify-content:center;
+justify-content:flex-start;
+padding-top:25px;
+}
+
+#wheel{
+width:240px;
+transition:transform 14s cubic-bezier(0.15,0.85,0.25,1);
 }
 
 .wheel-container{
 position:relative;
-width:250px;
-height:250px;
-}
-
-#wheel{
-width:100%;
-transition:transform 14s cubic-bezier(0.15,0.85,0.25,1);
+margin-top:20px;
 }
 
 .pointer{
 position:absolute;
-top:-12px;
+top:-15px;
 left:50%;
 transform:translateX(-50%);
 width:0;
 height:0;
-border-left:12px solid transparent;
-border-right:12px solid transparent;
-border-bottom:22px solid #ff4d6d;
+border-left:14px solid transparent;
+border-right:14px solid transparent;
+border-bottom:24px solid #ff4d6d;
 z-index:10;
 }
 
 #spinBtn{
-margin-top:20px;
-padding:12px 30px;
+padding:12px 28px;
 border:none;
 border-radius:25px;
 background:#ff8fab;
@@ -101,4 +100,3 @@ background:#ff8fab;
 color:white;
 cursor:pointer;
 }
-
