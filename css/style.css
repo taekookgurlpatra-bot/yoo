@@ -335,3 +335,50 @@ color:#204e7a;
 .fun-btn:hover{
 transform:scale(1.05);
 }
+
+/* Background blur for games */
+#game-background.blurred {
+  filter: blur(5px);
+  pointer-events: none; /* disables clicks on background while instructions are shown */
+}
+
+/* Instructions overlay */
+#instructions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  text-align: center;
+  max-width: 320px;
+  font-family: 'Dancing Script', cursive; /* cute font */
+}
+
+/* Controls buttons (Pause / Instructions) */
+#controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+#controls button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #d8b4fe;
+  color: white;
+  border: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+#controls button:hover {
+  transform: scale(1.05);
+}
