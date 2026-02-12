@@ -5,152 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎡 Spin The Love Wheel</title>
 <link rel="stylesheet" href="../css/style.css">
-<style>
-body, html {margin:0;padding:0;font-family:"Poppins",sans-serif;}
-#wheel-background {
-  width:100%; min-height:100vh;
-  background: linear-gradient(135deg,#ffcad4,#ffc2db);
-  display:flex; justify-content:center; align-items:center;
-  position:relative; overflow:hidden;
-}
-#instructions {
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  z-index:10; background:#fff0f5; border:2px solid #ffc2db;
-  padding:35px 30px; border-radius:20px; text-align:center;
-  max-width:380px; font-family:'Dancing Script',cursive;color:#6b216b;
-}
-#instructions h2 { font-size:28px; margin-bottom:15px; }
-#instructions p { font-size:18px; line-height:1.5; }
-#startGame { margin-top:15px; padding:12px 25px; font-size:18px; border:none; border-radius:15px; background:#ff8fab; color:white; cursor:pointer; }
-#startGame:hover { transform: scale(1.08); }
-.blurred { filter: blur(5px); pointer-events:none; }
-
-/* Wheel container */
-#wheel-container { position: relative; width:300px; height:300px; }
-#wheel-pointer {
-  position:absolute; top:-10px; left:50%; transform:translateX(-50%);
-  width:0; height:0; border-left:15px solid transparent; border-right:15px solid transparent;
-  border-bottom:30px solid #ff4d6d; z-index:5;
-}
-
-/* Dare overlay */
-#dare-overlay {
-  display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  background:#fff0f5; border:2px solid #ff8fab; border-radius:20px; padding:30px; max-width:90%;
-  text-align:center; z-index:10;
-}
-#dare-overlay h2 { font-size:24px; margin-bottom:10px; }
-#dare-overlay p { font-size:18px; margin-bottom:15px; }
-#dare-input { width:80%; padding:10px; margin-bottom:10px; border-radius:10px; border:1px solid #ccc; }
-#dare-canvas { border:1px solid #ccc; border-radius:10px; background:white; touch-action: none; }
-#submitDare { padding:10px 20px; background:#ff4d6d; color:white; border:none; border-radius:15px; cursor:pointer; font-size:16px; }
-#submitDare:hover { transform: scale(1.05); }
-
-/* Controls & Back */
-#controls { position:absolute; top:20px; right:20px; display:flex; gap:10px; z-index:5; }
-#controls button { padding:10px 15px; border-radius:10px; cursor:pointer; background:#d8b4fe; color:white; border:none; font-weight:600; transition:0.3s; }
-#controls button:hover { transform:scale(1.05); }
-#backBtn { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); }
-
-</style>
 </head>
 <body>
 
-<div id="game-container">
-  <div id="wheel-background">
-    <canvas id="wheel-canvas" width="300" height="300"></canvas>
-    <div id="wheel-pointer"></div>
-  </div>
+<div class="game-page-container">
+    <!-- Title -->
+    <h1 id="game-title">🎡 Spin The Love Wheel 🎡</h1>
 
-  <!-- Instructions overlay -->
-  <div id="instructions">
-    <h2>🎡 Spin The Love Wheel 🎡</h2>
-    <p>Click the wheel to spin and get your cute dare 💖✨!</p>
-    <button id="startGame">Okay! 💗</button>
-  </div>
+    <!-- Wheel Game Box -->
+    <div id="game-container">
+        <button id="spinBtn">🎡 Spin!</button>
+        <div id="wheel-dare"></div>
+    </div>
 
-  <!-- Dare overlay -->
-  <div id="dare-overlay">
-    <h2 id="dare-title"></h2>
-    <p id="dare-desc"></p>
-    <input type="text" id="dare-input" placeholder="Write here..." style="display:none;">
-    <canvas id="dare-canvas" width="250" height="150" style="display:none;"></canvas>
-    <br>
-    <button id="submitDare">Submit 💌</button>
-  </div>
+    <!-- Dare Pop-up Box -->
+    <div id="dare-box" style="display:none;">
+        <p id="dare-text"></p>
+        <div id="dare-instructions">
+            <p>Instructions to complete it:</p>
+            <ol>
+                <li>Take a screenshot 🤭</li>
+                <li>DO IT !! 😡😡</li>
+                <li>Send it to DEBU 🤭✨🌙</li>
+            </ol>
+        </div>
+        <button id="okDare">Okay 💗</button>
+    </div>
 
-  <!-- Controls & Back -->
-  <div id="controls">
-    <button id="pauseBtn">Pause</button>
-    <button id="instructionsBtn">Instructions</button>
-  </div>
-  <button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
+    <!-- Back Button -->
+    <div class="back-button-container">
+        <button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
+    </div>
 </div>
 
-<script src="../js/game-common.js"></script>
-<script src="../js/love-wheel.js"></script>
-<script>
-const wheelCanvas = document.getElementById("wheel-canvas");
-const ctx = wheelCanvas.getContext("2d");
-const segments = [
-  {title:"📸 Selfie", color:"#ffb6c1"},
-  {title:"💌 Compliments", color:"#ffc0cb"},
-  {title:"🎶 Song", color:"#ff69b4"},
-  {title:"📝 Poem", color:"#ff85c0"},
-  {title:"🎨 Doodle", color:"#ff99c8"}
-];
-
-let rotation = 0;
-
-function drawWheel(){
-  const segAngle = (2*Math.PI)/segments.length;
-  segments.forEach((seg,i)=>{
-    ctx.beginPath();
-    ctx.moveTo(150,150);
-    ctx.arc(150,150,150,i*segAngle,i*segAngle+segAngle);
-    ctx.fillStyle = seg.color;
-    ctx.fill();
-    // Draw text
-    ctx.save();
-    ctx.translate(150,150);
-    ctx.rotate(i*segAngle+segAngle/2);
-    ctx.textAlign="right";
-    ctx.fillStyle="#6b216b";
-    ctx.font="16px 'Dancing Script', cursive";
-    ctx.fillText(seg.title,140,0);
-    ctx.restore();
-  });
-}
-drawWheel();
-
-const wheelElement = wheelCanvas;
-wheelElement.addEventListener("click",()=>{
-  if(window.wheelSpinning) return;
-  window.wheelSpinning = true;
-  const spinDeg = Math.floor(Math.random()*360)+720;
-  rotation += spinDeg;
-  wheelCanvas.style.transition="transform 4s cubic-bezier(0.33,1,0.68,1)";
-  wheelCanvas.style.transform = `rotate(${rotation}deg)`;
-  setTimeout(()=>{
-    window.wheelSpinning=false;
-    // Determine segment
-    const index = segments.length - 1 - Math.floor((rotation%360)/(360/segments.length));
-    const dare = window.dares[index>=segments.length?0:index];
-    document.getElementById('dare-title').innerText=dare.title;
-    document.getElementById('dare-desc').innerText=dare.desc;
-    document.getElementById('dare-overlay').style.display="block";
-    // Show input/draw
-    document.getElementById('dare-input').style.display=dare.type==="text"?"block":"none";
-    const canvas = document.getElementById('dare-canvas');
-    canvas.style.display=dare.type==="draw"?"block":"none";
-    if(dare.type==="draw") {
-      const c = canvas.getContext('2d');
-      c.clearRect(0,0,canvas.width,canvas.height);
-      window.setupDrawing(canvas,c);
-    }
-  },4000);
-});
-</script>
-
+<script src="../js/wheel-game.js"></script>
 </body>
 </html>
