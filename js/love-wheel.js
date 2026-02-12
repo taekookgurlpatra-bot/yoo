@@ -1,3 +1,5 @@
+window.addEventListener("DOMContentLoaded", () => {
+
 const wheel = document.getElementById("wheel");
 const spinBtn = document.getElementById("spinBtn");
 const popup = document.getElementById("darePopup");
@@ -23,7 +25,6 @@ spinBtn.addEventListener("click", () => {
 spinBtn.disabled = true;
 
 tickSound.currentTime = 0;
-tickSound.volume = 1;
 tickSound.play().catch(()=>{});
 
 const randomIndex = Math.floor(Math.random()*dares.length);
@@ -40,20 +41,7 @@ currentRotation += finalRotation;
 
 wheel.style.transform = `rotate(${currentRotation}deg)`;
 
-
-/* Sound slows after 5 seconds */
-setTimeout(()=>{
-let fade = setInterval(()=>{
-if(tickSound.volume > 0.1){
-tickSound.volume -= 0.05;
-}else{
-clearInterval(fade);
-}
-},300);
-},5000);
-
-
-/* Show dare after 14 sec */
+/* Stop after 14 sec */
 setTimeout(()=>{
 tickSound.pause();
 showDare(dares[randomIndex]);
@@ -61,7 +49,6 @@ spinBtn.disabled = false;
 },14000);
 
 });
-
 
 function showDare(dare){
 
@@ -84,7 +71,6 @@ Instructions to complete it:<br>
 
 }
 
-
 okayBtn.onclick = ()=>{
 popup.style.display="none";
 };
@@ -92,3 +78,5 @@ popup.style.display="none";
 backBtn.onclick = ()=>{
 window.location.href="../funzone.html";
 };
+
+});
