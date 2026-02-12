@@ -315,6 +315,23 @@ cursor:pointer;
 transition:.3s;
 }
 
+/* Individual Fun Button Colors */
+
+.hearts-btn{
+background:#ffcad4;
+color:#7a294c;
+}
+
+.quiz-btn{
+background:#cdb4db;
+color:#5a2a6a;
+}
+
+.wheel-btn{
+background:#bde0fe;
+color:#204e7a;
+}
+
 .fun-btn:hover{
 transform:scale(1.05);
 }
