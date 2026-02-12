@@ -698,6 +698,7 @@ transform:scale(1.05);
 }
 
 #okDare {
+
     padding: 10px 20px;
     font-size: 16px;
     border: none;
@@ -707,3 +708,128 @@ transform:scale(1.05);
     cursor: pointer;
 }
 #okDare:hover { transform: scale(1.05); }
+
+/* TITLE */
+.game-title{
+text-align:center;
+font-size:30px;
+margin-bottom:15px;
+font-family:"Dancing Script",cursive;
+color:#d63384;
+}
+
+/* GAME BOX */
+.game-box{
+width:320px;
+height:420px;
+background:white;
+border-radius:30px;
+margin:auto;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+box-shadow:0 0 20px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+/* Blur when popup open */
+.blur{
+filter:blur(6px);
+}
+
+/* WHEEL */
+#wheel{
+width:250px;
+transition: transform 4s ease-out;
+}
+
+/* POINTER */
+.pointer{
+width:0;
+height:0;
+border-left:15px solid transparent;
+border-right:15px solid transparent;
+border-bottom:30px solid #ff4d6d;
+margin-bottom:10px;
+}
+
+/* SPIN BUTTON */
+#spin-btn{
+margin-top:15px;
+padding:10px 25px;
+border:none;
+border-radius:25px;
+background:#ff8fab;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+/* POPUP */
+.popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0.7);
+background:white;
+padding:20px;
+border-radius:20px;
+width:260px;
+text-align:center;
+box-shadow:0 0 15px rgba(0,0,0,0.2);
+opacity:0;
+transition:0.3s;
+z-index:10;
+}
+
+.popup-show{
+opacity:1;
+transform:translate(-50%,-50%) scale(1);
+}
+
+.hidden{
+display:none;
+}
+
+/* POPUP BUTTONS */
+.popup-buttons{
+display:flex;
+justify-content:space-between;
+margin-top:15px;
+}
+
+.popup-buttons button{
+padding:8px 18px;
+border:none;
+border-radius:20px;
+background:#ff8fab;
+color:white;
+cursor:pointer;
+}
+
+/* CONFETTI */
+#confetti-container{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+}
+
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+background:#ff8fab;
+top:-10px;
+animation: fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(360deg);
+}
+}
