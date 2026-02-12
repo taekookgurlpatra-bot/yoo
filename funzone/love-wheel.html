@@ -3,58 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spin The Love Wheel</title>
+<title>Spin The Love Wheel 🎡💞</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/wheel-game.css">
 </head>
 
 <body>
 
-<h1 class="game-title">🎡 Spin The Love Wheel 🎡</h1>
+<h1 class="game-title">Spin The Love Wheel 🎡💞</h1>
 
-<div class="game-box" id="game-box">
+<div class="game-box">
 
-    <div class="wheel-wrapper">
-        <div class="pointer"></div>
-        <img src="assets/images/love-wheel.png" id="wheel">
-    </div>
+<div class="wheel-container">
 
-    <button id="spin-btn">Spin 💞</button>
+<div class="pointer"></div>
+
+<img src="../assets/images/love-wheel.png" id="wheel">
+
+<button class="spin-btn" onclick="spinWheel()">SPIN 💗</button>
 
 </div>
+
+</div>
+
+<button class="back-btn" onclick="location.href='../funzone.html'">⬅ Back</button>
+
 
 <!-- Dare Popup -->
-<div id="dare-popup" class="popup hidden">
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
 
-    <h2 id="dare-text"></h2>
+    <h2 id="dare-title"></h2>
 
-    <div id="instructions">
-        <p>Instructions to complete it:</p>
-        <ol>
-            <li>Take a screenshot 🤭</li>
-            <li>DO IT !! 😡😡</li>
-            <li>Send it to DEBU 🤭✨🌙</li>
-        </ol>
-    </div>
+    <p class="instructions">
+    Instructions to complete it:<br>
+    1. Take a screenshot 🤭<br>
+    2. DO IT !! 😡😡<br>
+    3. Send it to DEBU 🤭✨🌙
+    </p>
 
-    <div class="popup-buttons">
-        <button id="back-btn">⬅ Back</button>
-        <button id="ok-btn">Okay 💗</button>
-    </div>
+    <button class="ok-btn" id="okBtn">Okay 💖</button>
+    <button class="menu-btn" id="menuBtn">Back To Funzone 💌</button>
 
+  </div>
 </div>
 
-<!-- Confetti Container -->
-<div id="confetti-container"></div>
 
-<!-- Sound -->
-<audio id="tick-sound" src="assets/sounds/tick.mp3"></audio>
+<audio id="tick-sound" src="../assets/sounds/tick.mp3" preload="auto"></audio>
 
-<button class="back-btn" onclick="window.location.href='funzone.html'">
-⬅ Back
-</button>
-
-<script src="js/wheel-game.js"></script>
+<script src="../js/wheel-game.js"></script>
 
 </body>
 </html>
