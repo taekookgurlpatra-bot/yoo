@@ -3,53 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spin The Love Wheel 🎡💞</title>
+<title>Spin The Love Wheel</title>
 
 <link rel="stylesheet" href="../css/wheel-game.css">
 </head>
 
 <body>
 
-<h1 class="game-title">Spin The Love Wheel 🎡💞</h1>
+<h1 class="game-title">🎡 Spin The Love Wheel 💗</h1>
 
 <div class="game-box">
 
 <div class="wheel-container">
-
 <div class="pointer"></div>
 
 <img src="../assets/images/love-wheel.png" id="wheel">
+</div>
 
-<button class="spin-btn" onclick="spinWheel()">SPIN 💗</button>
+<button id="spinBtn">SPIN 💞</button>
 
 </div>
 
-</div>
-
-<button class="back-btn" onclick="location.href='../funzone.html'">⬅ Back</button>
+<button class="back-btn" onclick="window.location.href='../funzone.html'">
+⬅ Back
+</button>
 
 
 <!-- Dare Popup -->
-<div class="popup-overlay" id="popup">
+<div id="darePopup" class="popup">
   <div class="popup-box">
-
-    <h2 id="dare-title"></h2>
-
-    <p class="instructions">
-    Instructions to complete it:<br>
-    1. Take a screenshot 🤭<br>
-    2. DO IT !! 😡😡<br>
-    3. Send it to DEBU 🤭✨🌙
-    </p>
-
-    <button class="ok-btn" id="okBtn">Okay 💖</button>
-    <button class="menu-btn" id="menuBtn">Back To Funzone 💌</button>
-
+    <div id="dareText"></div>
+    <button id="okayBtn">Okay 💗</button>
+    <button id="backBtn">Funzone 💌</button>
   </div>
 </div>
-
-
-<audio id="tick-sound" src="../assets/sounds/tick.mp3" preload="auto"></audio>
 
 <script src="../js/wheel-game.js"></script>
 
