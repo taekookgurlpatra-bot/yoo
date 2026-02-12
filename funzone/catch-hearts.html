@@ -5,72 +5,125 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💘 Catch The Flying Hearts</title>
 <link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 <style>
+body { margin:0; font-family:"Poppins",sans-serif; }
+
+/* Game background */
+#hearts-background {
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#ffe4ec,#ffc2db);
+    position: relative;
+}
+
+/* Instructions overlay */
 #instructions {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px; background: white; padding: 20px;
-  border-radius: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  text-align: center; z-index: 10;
+  position: absolute;
+  top:50%; left:50%;
+  transform: translate(-50%,-50%);
+  z-index:10;
+  background: #fff0f5;
+  border: 2px solid #ffc2db;
+  padding: 35px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  text-align: center;
+  max-width: 380px;
+  font-family: 'Dancing Script', cursive;
+  color: #6b216b;
+  animation: popIn 0.5s ease;
 }
-#instructions button { margin-top: 20px; padding: 10px 20px; border-radius: 10px; cursor: pointer; }
-.blurred { filter: blur(5px); pointer-events: none; }
-#game-container { position: relative; width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; background: #ffe6f0;
-<!-- Back button -->
-<button id="backBtn" class="back-btn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
+
+#instructions h2 { font-size:28px; margin-bottom:15px; }
+#instructions p { font-size:18px; line-height:1.5; }
+#startGame { margin-top:15px; padding:12px 25px; font-size:18px; border:none; border-radius:15px; background:#ff8fab; color:white; cursor:pointer; transition:0.3s; }
+#startGame:hover { transform: scale(1.08); }
+
+/* Game content placeholder */
+#game-container-area { width:100%; min-height:400px; }
+
+/* Controls buttons */
+#controls {
+  position: absolute;
+  top: 20px; right: 20px;
+  display: flex; gap: 10px;
+  z-index: 5;
 }
-#controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 5; }
-#controls button { padding: 10px 15px; border-radius: 10px; cursor: pointer; }
+#controls button {
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #d8b4fe;
+  color: white;
+  border: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+#controls button:hover { transform: scale(1.05); }
+
+/* Back button */
+#backBtn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Blur effect */
+.blurred { filter: blur(5px); pointer-events:none; }
+
+/* Cute pop-in animation */
+@keyframes popIn {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
 </style>
 </head>
 <body>
+
 <div id="game-container">
-  <canvas id="gameCanvas" width="600" height="400"></canvas>
-  <div id="instructions">
-    <h2>How to Play</h2>
-    <p id="instruction-text">Move your basket to catch flying hearts. Avoid missing them!</p>
-    <button id="startGame">Okay</button>
+
+  <!-- Game Background -->
+  <div id="hearts-background">
+    <div id="game-container-area">
+      <!-- Hearts game canvas or elements go here -->
+      <p style="font-size:20px; color:#6b216b;">Hearts flying animation placeholder 💘</p>
+    </div>
   </div>
+
+  <!-- Instructions overlay -->
+  <div id="instructions">
+    <h2>💖 Catch The Flying Hearts 💖</h2>
+    <p>Click or tap the hearts 💘 as they float across the screen! Score points for each heart you catch 🎯✨</p>
+    <button id="startGame">Okay! 💗</button>
+  </div>
+
+  <!-- Controls -->
   <div id="controls">
     <button id="pauseBtn">Pause</button>
     <button id="instructionsBtn">Instructions</button>
   </div>
+
+  <!-- Back Button -->
+  <button id="backBtn" class="back-btn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
+
 </div>
 
-<script src="../js/catch-hearts.js"></script>
+<script src="../js/game-common.js"></script>
 <script>
-const gameContainer = document.getElementById('game-container');
-const instructions = document.getElementById('instructions');
-const startBtn = document.getElementById('startGame');
-const pauseBtn = document.getElementById('pauseBtn');
-const instructionsBtn = document.getElementById('instructionsBtn');
+// Start game placeholder function
+function startHeartsGame() {
+  document.getElementById('game-container-area').innerHTML = '<p style="font-size:22px; color:#6b216b;">💘 Catch the hearts game running! 💘</p>';
+}
 
-let gameRunning = false;
-let gamePaused = false;
-
-// Show instructions initially
-gameContainer.classList.add('blurred');
-instructions.style.display = 'block';
-
-// Start game
-startBtn.addEventListener('click', () => {
-  instructions.style.display = 'none';
-  gameContainer.classList.remove('blurred');
-  gameRunning = true;
-  startCatchHeartsGame();
-});
-
-// Pause/play
-pauseBtn.addEventListener('click', () => {
-  gamePaused = !gamePaused;
-  pauseBtn.textContent = gamePaused ? 'Play' : 'Pause';
-});
-
-// Reopen instructions
-instructionsBtn.addEventListener('click', () => {
-  instructions.style.display = 'block';
-  gameContainer.classList.add('blurred');
-});
+// Initialize
+initGame('hearts-background', startHeartsGame);
 </script>
+
 </body>
 </html>
