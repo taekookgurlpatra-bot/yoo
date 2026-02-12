@@ -18,7 +18,7 @@ const dares = [
 "TRY AGAIN"
 ];
 
-spinBtn.onclick = () => {
+spinBtn.addEventListener("click", () => {
 
 spinBtn.disabled = true;
 
@@ -27,6 +27,7 @@ tickSound.volume = 1;
 tickSound.play().catch(()=>{});
 
 const randomIndex = Math.floor(Math.random()*dares.length);
+
 const segment = 360 / dares.length;
 const spins = 6;
 
@@ -40,10 +41,10 @@ currentRotation += finalRotation;
 wheel.style.transform = `rotate(${currentRotation}deg)`;
 
 
-/* Sound slow after 5 seconds */
+/* Sound slows after 5 seconds */
 setTimeout(()=>{
 let fade = setInterval(()=>{
-if(tickSound.volume>0.1){
+if(tickSound.volume > 0.1){
 tickSound.volume -= 0.05;
 }else{
 clearInterval(fade);
@@ -52,36 +53,42 @@ clearInterval(fade);
 },5000);
 
 
-/* Stop after 14 seconds */
+/* Show dare after 14 sec */
 setTimeout(()=>{
 tickSound.pause();
 showDare(dares[randomIndex]);
-spinBtn.disabled=false;
+spinBtn.disabled = false;
 },14000);
 
-};
+});
+
 
 function showDare(dare){
 
-popup.style.display="flex";
+popup.style.display = "flex";
 
-if(dare==="TRY AGAIN"){
-dareText.innerHTML="<h2>TRY AGAIN !!</h2>";
-}else{
-dareText.innerHTML=
-`<h2>${dare}</h2>
-<p>Instructions to complete it:<br>
+if(dare === "TRY AGAIN"){
+dareText.innerHTML = "<h2>TRY AGAIN !!</h2>";
+}
+else{
+dareText.innerHTML = `
+<h2>${dare}</h2>
+<p>
+Instructions to complete it:<br>
 1. Take a screenshot 🤭<br>
 2. DO IT !! 😡😡<br>
-3. Send it to DEBU 🤭✨🌙</p>`;
+3. Send it to DEBU 🤭✨🌙
+</p>
+`;
 }
 
 }
 
-okayBtn.onclick=()=>{
+
+okayBtn.onclick = ()=>{
 popup.style.display="none";
 };
 
-backBtn.onclick=()=>{
+backBtn.onclick = ()=>{
 window.location.href="../funzone.html";
 };
