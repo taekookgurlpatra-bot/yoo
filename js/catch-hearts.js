@@ -1,33 +1,34 @@
-let hearts = [], score = 0, gamePaused = false, basketX = window.innerWidth/2 - 40;
+let hearts = [], score = 0, gamePaused = false, basketX = 180; // basket middle of 360px box
 const maxScore = 20;
 
-const background = document.getElementById('hearts-background');
+const container = document.getElementById('game-container');
 const basket = document.getElementById('basket');
 const scoreEl = document.getElementById('score');
 const gameOver = document.getElementById('game-over');
 
-// Create hearts: red normally, gold sometimes
 function createHeart(){
   if(score >= maxScore) return;
 
   const heart = document.createElement('div');
   heart.classList.add('heart');
 
-  const isGolden = Math.random() < 0.15; // 15% chance golden
-  heart.innerText = isGolden ? '💛' : '❤️';
-  heart.dataset.value = isGolden ? 3 : 1; // points
+  const isGolden = Math.random() < 0.15;
+  heart.innerText = isGolden ? '💛' : '💗';
+  heart.dataset.value = isGolden ? 3 : 1;
 
-  heart.style.left = Math.random()*(window.innerWidth-30)+'px';
+  heart.style.left = Math.random()*(container.clientWidth-30)+'px';
   heart.style.top = '-30px';
-  background.appendChild(heart);
+  container.appendChild(heart);
   hearts.push(heart);
 }
 
 function moveBasket(e){
   if(gamePaused) return;
-  basketX = e.touches ? e.touches[0].clientX - 40 : e.clientX - 40;
+  const rect = container.getBoundingClientRect();
+  const x = e.touches ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
+  basketX = x - 30; // adjust for basket width
   if(basketX < 0) basketX = 0;
-  if(basketX > window.innerWidth-80) basketX = window.innerWidth-80;
+  if(basketX > container.clientWidth-60) basketX = container.clientWidth-60;
   basket.style.left = basketX + 'px';
 }
 
@@ -35,20 +36,20 @@ function updateHearts(){
   if(gamePaused) return;
   hearts.forEach((heart,i)=>{
     let top = parseFloat(heart.style.top);
-    top += 1.2; // slow falling
+    top += 1.2; // slow fall
     heart.style.top = top+'px';
 
     const heartX = parseFloat(heart.style.left);
     const heartY = top;
 
-    if(heartY+30 >= window.innerHeight-60 && heartX+30>basketX && heartX<basketX+80){
+    if(heartY+30 >= container.clientHeight-60 && heartX+30>basketX && heartX<basketX+60){
       score += parseInt(heart.dataset.value);
       if(score > maxScore) score = maxScore;
       scoreEl.innerText = 'Score: '+score;
-      background.removeChild(heart);
+      container.removeChild(heart);
       hearts.splice(i,1);
-    } else if(top > window.innerHeight){
-      background.removeChild(heart);
+    } else if(top > container.clientHeight){
+      container.removeChild(heart);
       hearts.splice(i,1);
     }
   });
@@ -63,8 +64,8 @@ function updateHearts(){
 
 function startHeartsGame(){
   document.getElementById('instructions').style.display='none';
-  background.classList.remove('blurred');
-  setInterval(createHeart, 1200); // slower heart rain
+  container.classList.remove('blurred');
+  setInterval(createHeart, 1200);
   requestAnimationFrame(updateHearts);
 }
 
@@ -76,10 +77,10 @@ document.getElementById('pauseBtn').addEventListener('click',()=>{
 });
 document.getElementById('instructionsBtn').addEventListener('click',()=>{
   document.getElementById('instructions').style.display='block';
-  background.classList.add('blurred');
+  container.classList.add('blurred');
 });
 
-background.addEventListener('mousemove', moveBasket);
-background.addEventListener('touchmove', moveBasket);
+container.addEventListener('mousemove', moveBasket);
+container.addEventListener('touchmove', moveBasket);
 
-initGame('hearts-background', startHeartsGame);
+initGame('game-container', startHeartsGame);
