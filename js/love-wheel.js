@@ -1,87 +1,103 @@
 const wheel = document.getElementById("wheel");
-const tickSound = document.getElementById("tick-sound");
-const popup = document.getElementById("popup");
-const dareTitle = document.getElementById("dare-title");
-const okBtn = document.getElementById("okBtn");
-const menuBtn = document.getElementById("menuBtn");
+const spinBtn = document.getElementById("spinBtn");
+const popup = document.getElementById("darePopup");
+const dareText = document.getElementById("dareText");
+const okayBtn = document.getElementById("okayBtn");
+const backBtn = document.getElementById("backBtn");
 
-let spinning = false;
+let currentRotation = 0;
+
+// 🎵 Sound
+const tickSound = new Audio("../assets/sounds/tick.mp3");
+tickSound.loop = true;
 
 const dares = [
-"Click a cute selfie 💗",
-"Give me 5 sweet compliments 🥺",
-"Draw something that reminds you of us 🎨",
-"Write a tiny love note 💌",
-"Send a random cute photo 📸",
-"TRY AGAIN !!"
+    "Take a cute selfie 📸",
+    "Give 5 compliments ❤️",
+    "Send a cute photo 🌸",
+    "Draw a heart 💗",
+    "Write a love note 💌",
+    "TRY AGAIN"
 ];
 
-function spinWheel(){
+// Each segment = 360 / 6 = 60 degrees
+const segmentAngle = 60;
 
-if(spinning) return;
-spinning = true;
+spinBtn.addEventListener("click", spinWheel);
 
-tickSound.currentTime = 0;
-tickSound.volume = 0.8;
-tickSound.playbackRate = 1;
-tickSound.play();
+function spinWheel() {
 
-const randomRotation = 360*6 + Math.floor(Math.random()*360);
+    spinBtn.disabled = true;
 
-wheel.style.transform = `rotate(${randomRotation}deg)`;
+    // Reset sound
+    tickSound.currentTime = 0;
+    tickSound.volume = 1;
+    tickSound.play().catch(()=>{});
 
-setTimeout(slowDownTick,9000);
+    // Random segment
+    const randomIndex = Math.floor(Math.random() * dares.length);
 
-setTimeout(()=>{
-tickSound.pause();
-tickSound.currentTime=0;
-spinning=false;
+    // Random spins (adds realism)
+    const extraSpins = 5 + Math.floor(Math.random() * 3);
 
-const resultIndex = Math.floor(Math.random()*dares.length);
-showDare(dares[resultIndex]);
+    const finalAngle =
+        (360 * extraSpins) +
+        (randomIndex * segmentAngle) +
+        (segmentAngle / 2);
 
-},14000);
+    currentRotation += finalAngle;
 
+    wheel.style.transition = "transform 5s cubic-bezier(0.33, 1, 0.68, 1)";
+    wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+    // 🎵 Gradually slow sound
+    let fadeInterval = setInterval(() => {
+        if (tickSound.volume > 0.05) {
+            tickSound.volume -= 0.05;
+        } else {
+            tickSound.pause();
+            clearInterval(fadeInterval);
+        }
+    }, 300);
+
+    setTimeout(() => {
+
+        showDare(dares[randomIndex]);
+        spinBtn.disabled = false;
+
+    }, 5000);
 }
 
-function slowDownTick(){
+function showDare(dare) {
 
-let interval = setInterval(()=>{
+    popup.style.display = "flex";
 
-if(tickSound.playbackRate>0.4){
-tickSound.playbackRate -=0.05;
+    if (dare === "TRY AGAIN") {
+
+        dareText.innerHTML = `
+        <h2>TRY AGAIN !!</h2>
+        `;
+
+    } else {
+
+        dareText.innerHTML = `
+        <h2>${dare}</h2>
+        <p style="margin-top:15px;">
+        Instructions to complete it:<br>
+        1. Take a screenshot 🤭<br>
+        2. DO IT !! 😡😡<br>
+        3. Send it to DEBU 🤭✨🌙
+        </p>
+        `;
+    }
 }
 
-if(tickSound.volume>0.1){
-tickSound.volume -=0.05;
-}else{
-clearInterval(interval);
-}
-
-},300);
-
-}
-
-function showDare(dare){
-
-popup.style.display="flex";
-dareTitle.innerText=dare;
-
-if(dare==="TRY AGAIN !!"){
-okBtn.innerText="Spin Again 💫";
-okBtn.onclick=()=>{
-popup.style.display="none";
+// OKAY → Back to game page
+okayBtn.onclick = () => {
+    popup.style.display = "none";
 };
-}
-else{
-okBtn.innerText="Okay 💖";
-okBtn.onclick=()=>{
-popup.style.display="none";
-};
-}
 
-menuBtn.onclick=()=>{
-location.href="../funzone.html";
+// BACK → Funzone menu
+backBtn.onclick = () => {
+    window.location.href = "../funzone.html";
 };
-
-}
