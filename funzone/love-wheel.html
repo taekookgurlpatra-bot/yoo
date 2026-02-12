@@ -3,41 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎡 Spin The Love Wheel</title>
-<link rel="stylesheet" href="../css/style.css">
+<title>Spin The Love Wheel</title>
+
+<link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<div class="game-page-container">
-    <!-- Title -->
-    <h1 id="game-title">🎡 Spin The Love Wheel 🎡</h1>
+<h1 class="game-title">🎡 Spin The Love Wheel 🎡</h1>
 
-    <!-- Wheel Game Box -->
-    <div id="game-container">
-        <button id="spinBtn">🎡 Spin!</button>
-        <div id="wheel-dare"></div>
+<div class="game-box" id="game-box">
+
+    <div class="wheel-wrapper">
+        <div class="pointer"></div>
+        <img src="assets/images/love-wheel.png" id="wheel">
     </div>
 
-    <!-- Dare Pop-up Box -->
-    <div id="dare-box" style="display:none;">
-        <p id="dare-text"></p>
-        <div id="dare-instructions">
-            <p>Instructions to complete it:</p>
-            <ol>
-                <li>Take a screenshot 🤭</li>
-                <li>DO IT !! 😡😡</li>
-                <li>Send it to DEBU 🤭✨🌙</li>
-            </ol>
-        </div>
-        <button id="okDare">Okay 💗</button>
-    </div>
+    <button id="spin-btn">Spin 💞</button>
 
-    <!-- Back Button -->
-    <div class="back-button-container">
-        <button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
-    </div>
 </div>
 
-<script src="../js/wheel-game.js"></script>
+<!-- Dare Popup -->
+<div id="dare-popup" class="popup hidden">
+
+    <h2 id="dare-text"></h2>
+
+    <div id="instructions">
+        <p>Instructions to complete it:</p>
+        <ol>
+            <li>Take a screenshot 🤭</li>
+            <li>DO IT !! 😡😡</li>
+            <li>Send it to DEBU 🤭✨🌙</li>
+        </ol>
+    </div>
+
+    <div class="popup-buttons">
+        <button id="back-btn">⬅ Back</button>
+        <button id="ok-btn">Okay 💗</button>
+    </div>
+
+</div>
+
+<!-- Confetti Container -->
+<div id="confetti-container"></div>
+
+<!-- Sound -->
+<audio id="tick-sound" src="assets/sounds/tick.mp3"></audio>
+
+<button class="back-btn" onclick="window.location.href='funzone.html'">
+⬅ Back
+</button>
+
+<script src="js/wheel-game.js"></script>
+
 </body>
 </html>
