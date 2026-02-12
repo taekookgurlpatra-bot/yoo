@@ -86,6 +86,43 @@ color:#b03060;
 margin-bottom:20px;
 }
 
+.popup-box button{
+padding:12px 22px;
+margin:8px;
+border:none;
+border-radius:30px;
+font-size:15px;
+cursor:pointer;
+transition:0.3s;
+font-weight:600;
+}
+
+/* Play Again Button */
+
+.popup-box button:first-of-type{
+background:linear-gradient(135deg,#ff9ecf,#ff6fa5);
+color:white;
+box-shadow:0 4px 10px rgba(255,111,165,0.4);
+}
+
+.popup-box button:first-of-type:hover{
+transform:scale(1.08);
+background:linear-gradient(135deg,#ff6fa5,#ff4d94);
+}
+
+/* Back Button */
+
+.popup-box button:last-of-type{
+background:linear-gradient(135deg,#cdb4db,#b8a2d9);
+color:white;
+box-shadow:0 4px 10px rgba(180,162,217,0.4);
+}
+
+.popup-box button:last-of-type:hover{
+transform:scale(1.08);
+background:linear-gradient(135deg,#b8a2d9,#9f86c0);
+}
+
 /* HIDE */
 
 .hidden{
