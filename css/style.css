@@ -512,14 +512,22 @@ transform:scale(1.05);
 
 /* ---------- Catch The Flying Hearts Styles --------- */
 
-/* Game title */
+/* Page container to center everything */
+.game-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px; /* space from top */
+}
+
+/* Title centered on top */
 #game-title {
-    text-align:center;
-    font-size:32px;
-    font-weight:bold;
-    color:#d63384;
-    margin:20px 0;
-    font-family:'Dancing Script', cursive;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #d63384;
+    font-family: 'Dancing Script', cursive;
+    margin-bottom: 20px; /* space below title */
 }
 
 /* iPhone-style square game box */
@@ -533,7 +541,7 @@ transform:scale(1.05);
     position: relative;
     overflow: hidden;
     border: 3px solid #ffb6c1;
-    margin: 0 auto 20px auto;
+    margin-bottom: 20px; /* space below box before back button */
 }
 
 /* Basket */
@@ -562,6 +570,25 @@ transform:scale(1.05);
     font-weight: bold;
     color:#6b216b;
 }
+
+/* Back button directly below game box */
+.back-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px; 
+}
+#backBtn {
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 20px;
+    background: #ff8fab;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#backBtn:hover { transform: scale(1.05); }
 
 /* Instructions overlay */
 #instructions-overlay {
@@ -617,22 +644,3 @@ transform:scale(1.05);
     cursor:pointer;
 }
 #game-over button:hover { transform:scale(1.05); }
-
-/* Back button directly below game box */
-.back-button-container {
-    width: 100%;
-    display:flex;
-    justify-content:center;
-    margin-bottom:40px;
-}
-#backBtn {
-    padding:12px 25px;
-    font-size:18px;
-    border:none;
-    border-radius:20px;
-    background:#ff8fab;
-    color:white;
-    cursor:pointer;
-    transition:0.3s;
-}
-#backBtn:hover { transform: scale(1.05); }
