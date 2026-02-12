@@ -6,97 +6,147 @@
 <title>💘 Catch The Flying Hearts</title>
 <link rel="stylesheet" href="../css/style.css">
 <style>
-/* Hearts Game Styles */
-#hearts-background {
-  width:100%;
-  min-height:100vh;
+/* Page background */
+body {
   background: linear-gradient(135deg,#ffe4ec,#ffc2db);
-  position: relative;
-  overflow: hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+  font-family:'Poppins',sans-serif;
 }
 
+/* iPhone-like game box */
+#game-container {
+  width: 360px;
+  max-width: 90vw;
+  height: 640px;
+  background: linear-gradient(135deg,#ffe4ec,#ffc2db);
+  border-radius: 40px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #ffb6c1;
+  margin-top:40px;
+}
+
+/* Basket */
 #basket {
   position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 40px;
+  font-size: 60px;
   z-index: 5;
 }
 
+/* Hearts */
 .heart {
   position: absolute;
   font-size: 30px;
   z-index: 4;
   animation: float 1s ease-in-out infinite alternate;
 }
-
 @keyframes float {
   0% { transform: translateY(0); }
   100% { transform: translateY(5px); }
 }
 
+/* Score */
 #score {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 22px;
+  top: 15px;
+  left: 15px;
+  font-size: 20px;
   font-weight: bold;
   color: #6b216b;
   z-index: 10;
 }
 
+/* Instructions overlay */
+#instructions-overlay {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(255, 192, 203,0.5); /* semi-transparent pink */
+  backdrop-filter: blur(6px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:20;
+}
+
 #instructions {
-  position: absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  z-index:10; background:#fff0f5; border:2px solid #ffc2db;
-  padding:35px 30px; border-radius:20px; text-align:center;
-  max-width:380px; font-family:'Dancing Script',cursive;color:#6b216b;
+  background:#fff0f5; border:2px solid #ffc2db;
+  padding:35px 30px; border-radius:25px; text-align:center;
+  max-width:320px; font-family:'Dancing Script',cursive;color:#6b216b;
 }
 #instructions h2 { font-size:28px; margin-bottom:15px; }
 #instructions p { font-size:18px; line-height:1.5; }
 #startGame { margin-top:15px; padding:12px 25px; font-size:18px; border:none; border-radius:15px; background:#ff8fab; color:white; cursor:pointer; }
 #startGame:hover { transform: scale(1.08); }
-.blurred { filter: blur(5px); pointer-events:none; }
 
-#controls { position:absolute; top:20px; right:20px; display:flex; gap:10px; z-index:5; }
-#controls button { padding:10px 15px; border-radius:10px; cursor:pointer; background:#d8b4fe; color:white; border:none; font-weight:600; transition:0.3s; }
+/* Controls */
+#controls {
+  display:flex; gap:8px; margin-top:10px;
+}
+#controls button { padding:6px 10px; border-radius:10px; cursor:pointer; background:#d8b4fe; color:white; border:none; font-weight:600; font-size:14px; transition:0.3s; }
 #controls button:hover { transform:scale(1.05); }
 
-#backBtn { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); }
-
+/* Game Over */
 #game-over {
   display:none;
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  font-size:32px; font-weight:bold; color:#ff4d6d; text-align:center;
-  background:#fff0f5; padding:30px 20px; border-radius:20px; border:2px solid #ffc2db;
+  font-size:28px; font-weight:bold; color:#ff4d6d; text-align:center;
+  background:#fff0f5; padding:25px 15px; border-radius:20px; border:2px solid #ffc2db;
   z-index:20;
 }
+
+/* Back button below the box */
+#backBtn {
+  display:block;
+  margin:20px auto 30px auto;
+  padding:12px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:20px;
+  background:#ff8fab;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+#backBtn:hover { transform:scale(1.05); }
 </style>
 </head>
 <body>
 
-<div id="hearts-background" class="blurred">
+<!-- iPhone-style game box -->
+<div id="game-container">
   <div id="score">Score: 0</div>
   <div id="basket">🧺</div>
+  <div id="game-over">🎉 You caught all hearts! 🎉</div>
 </div>
 
-<div id="instructions">
-  <h2>💘 Catch The Flying Hearts 💘</h2>
-  <p>Move the basket to catch hearts falling from the sky!<br>Red hearts = 1 point ❤️<br>Golden hearts = 3 points 💛</p>
-  <button id="startGame">Okay! 💗</button>
+<!-- Instructions overlay -->
+<div id="instructions-overlay">
+  <div id="instructions">
+    <h2>💘 Catch The Flying Hearts 💘</h2>
+    <p>Move the basket to catch 💗 hearts falling from the sky!<br>
+       Red 💗 = 1 point ❤️<br>
+       Golden 💛 = 3 points 💛</p>
+    <button id="startGame">Okay! 💗</button>
+  </div>
 </div>
 
-<div id="game-over">🎉 You caught all hearts! 🎉</div>
-
+<!-- Controls -->
 <div id="controls">
   <button id="pauseBtn">Pause</button>
   <button id="instructionsBtn">Instructions</button>
 </div>
 
+<!-- Back button -->
 <button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
 
 <script src="../js/game-common.js"></script>
 <script src="../js/catch-hearts.js"></script>
-
 </body>
 </html>
