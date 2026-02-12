@@ -7,9 +7,8 @@ const backBtn = document.getElementById("backBtn");
 
 let currentRotation = 0;
 
-// 🎵 Sound
 const tickSound = new Audio("../assets/sounds/tick.mp3");
-tickSound.loop = true;
+tickSound.loop = false;
 
 const dares = [
     "Take a cute selfie 📸",
@@ -20,8 +19,7 @@ const dares = [
     "TRY AGAIN"
 ];
 
-// Each segment = 360 / 6 = 60 degrees
-const segmentAngle = 60;
+const segmentAngle = 360 / dares.length;
 
 spinBtn.addEventListener("click", spinWheel);
 
@@ -29,16 +27,13 @@ function spinWheel() {
 
     spinBtn.disabled = true;
 
-    // Reset sound
     tickSound.currentTime = 0;
     tickSound.volume = 1;
     tickSound.play().catch(()=>{});
 
-    // Random segment
     const randomIndex = Math.floor(Math.random() * dares.length);
 
-    // Random spins (adds realism)
-    const extraSpins = 5 + Math.floor(Math.random() * 3);
+    const extraSpins = 7;
 
     const finalAngle =
         (360 * extraSpins) +
@@ -47,25 +42,51 @@ function spinWheel() {
 
     currentRotation += finalAngle;
 
-    wheel.style.transition = "transform 5s cubic-bezier(0.33, 1, 0.68, 1)";
+    /*
+    Custom easing:
+    Fast start
+    Maintain speed
+    Slow down gradually after 5 sec
+    */
+    wheel.style.transition =
+        "transform 14s cubic-bezier(0.15, 0.85, 0.25, 1)";
     wheel.style.transform = `rotate(${currentRotation}deg)`;
 
-    // 🎵 Gradually slow sound
-    let fadeInterval = setInterval(() => {
-        if (tickSound.volume > 0.05) {
-            tickSound.volume -= 0.05;
-        } else {
-            tickSound.pause();
-            clearInterval(fadeInterval);
-        }
-    }, 300);
 
+    // 🎵 Gradual sound slowdown starting at 5 sec
     setTimeout(() => {
+
+        let slowInterval = setInterval(() => {
+
+            if (tickSound.playbackRate > 0.4) {
+                tickSound.playbackRate -= 0.05;
+            }
+
+            if (tickSound.volume > 0.1) {
+                tickSound.volume -= 0.04;
+            }
+
+            if (tickSound.playbackRate <= 0.4) {
+                clearInterval(slowInterval);
+            }
+
+        }, 400);
+
+    }, 5000);
+
+
+    // Stop everything at 14 sec
+    setTimeout(() => {
+
+        tickSound.pause();
+        tickSound.currentTime = 0;
+        tickSound.volume = 1;
+        tickSound.playbackRate = 1;
 
         showDare(dares[randomIndex]);
         spinBtn.disabled = false;
 
-    }, 5000);
+    }, 14000);
 }
 
 function showDare(dare) {
@@ -74,9 +95,7 @@ function showDare(dare) {
 
     if (dare === "TRY AGAIN") {
 
-        dareText.innerHTML = `
-        <h2>TRY AGAIN !!</h2>
-        `;
+        dareText.innerHTML = `<h2>TRY AGAIN !!</h2>`;
 
     } else {
 
@@ -92,12 +111,10 @@ function showDare(dare) {
     }
 }
 
-// OKAY → Back to game page
 okayBtn.onclick = () => {
     popup.style.display = "none";
 };
 
-// BACK → Funzone menu
 backBtn.onclick = () => {
     window.location.href = "../funzone.html";
 };
