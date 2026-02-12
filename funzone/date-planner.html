@@ -9,7 +9,10 @@
 <style>
 body { margin:0; font-family: 'Comic Neue', cursive; background:#f3e8ff; }
 #game-background { width:100%; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; }
-#question-container { text-align:center; margin-top:50px; }
+#question-container { text-align:center; margin-top:50px; 
+                    <!-- Back button -->
+<button id="backBtn" class="back-btn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
+}
 #question { font-size:22px; font-weight:bold; margin-bottom:20px; }
 .option-btn { display:block; margin:10px auto; padding:10px 20px; border-radius:15px; border:none; cursor:pointer; background:#d8b4fe; color:white; font-size:18px; width:60%; max-width:300px; }
 .option-btn:hover { background:#c084fc; }
