@@ -1,4 +1,3 @@
-// DOM Elements
 const gameContainer = document.getElementById('game-container');
 const basket = document.getElementById('basket');
 const scoreDisplay = document.getElementById('score');
