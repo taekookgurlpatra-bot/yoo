@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💖 Your Perfect Date</title>
+<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body { margin:0; font-family: 'Comic Neue', cursive; background:#f3e8ff; }
+#game-background { width:100%; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+#question-container { text-align:center; margin-top:50px; }
+#question { font-size:22px; font-weight:bold; margin-bottom:20px; }
+.option-btn { display:block; margin:10px auto; padding:10px 20px; border-radius:15px; border:none; cursor:pointer; background:#d8b4fe; color:white; font-size:18px; width:60%; max-width:300px; }
+.option-btn:hover { background:#c084fc; }
+#result-container { text-align:center; margin-top:50px; max-width:80%; }
+#result-title { font-size:32px; font-weight:bold; margin-bottom:15px; color:#6b21a8; }
+#result-desc { font-size:20px; color:#4b0082; }
+</style>
+</head>
+<body>
+
+<div id="game-container">
+
+  <div id="game-background">
+    <div id="question-container" style="display:none;">
+      <div id="question"></div>
+      <button class="option-btn" id="opt0"></button>
+      <button class="option-btn" id="opt1"></button>
+      <button class="option-btn" id="opt2"></button>
+      <button class="option-btn" id="opt3"></button>
+    </div>
+
+    <div id="result-container" style="display:none;">
+      <div id="result-title"></div>
+      <div id="result-desc"></div>
+    </div>
+  </div>
+
+  <div id="instructions">
+    <h2>How to Play</h2>
+    <p>Answer these 10 fun questions so we can plan the perfect date for both of us! 💖</p>
+    <button id="startGame">Okay</button>
+  </div>
+
+  <div id="controls">
+    <button id="pauseBtn">Pause</button>
+    <button id="instructionsBtn">Instructions</button>
+  </div>
+
+</div>
+
+<script src="../js/date-planner.js"></script>
+<script src="../js/game-common.js"></script>
+<script>
+function startGame(){ startDatePlanner(); }
+</script>
+
+</body>
+</html>
+
