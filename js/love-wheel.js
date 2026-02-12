@@ -24,19 +24,19 @@ tickSound.currentTime = 0;
 tickSound.volume = 1;
 tickSound.play().catch(()=>{});
 
-const randomIndex = Math.floor(Math.random()*dares.length);
+const index = Math.floor(Math.random()*dares.length);
 
-const segment = 360 / dares.length;
+const segment = 360/dares.length;
 const spins = 6;
 
-rotation += 360*spins + (randomIndex*segment);
+rotation += 360*spins + index*segment;
 
 wheel.style.transform = `rotate(${rotation}deg)`;
 
-/* slow sound after 5 sec */
+/* sound fade after 5 sec */
 setTimeout(()=>{
 let fade = setInterval(()=>{
-if(tickSound.volume>0.1){
+if(tickSound.volume > 0.1){
 tickSound.volume -= 0.05;
 }else{
 clearInterval(fade);
@@ -44,24 +44,23 @@ clearInterval(fade);
 },300);
 },5000);
 
-/* show dare */
+/* popup */
 setTimeout(()=>{
 
 tickSound.pause();
 
 popup.style.display="flex";
 
-if(dares[randomIndex] === "TRY AGAIN"){
+if(dares[index] === "TRY AGAIN"){
 dareText.innerHTML="<h2>TRY AGAIN !!</h2>";
 }
 else{
-dareText.innerHTML = `
-<h2>${dares[randomIndex]}</h2>
+dareText.innerHTML=`
+<h2>${dares[index]}</h2>
 <p>
-Instructions to complete it:<br>
-1. Take a screenshot 🤭<br>
+1. Screenshot 🤭<br>
 2. DO IT !! 😡😡<br>
-3. Send it to DEBU 🤭✨🌙
+3. Send to Debu 🤭✨
 </p>
 `;
 }
