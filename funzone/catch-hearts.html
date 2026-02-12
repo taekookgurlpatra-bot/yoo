@@ -8,39 +8,33 @@
 </head>
 <body>
 
-<!-- Game title -->
-<div id="game-title">💘 Catch The Flying Hearts 💘</div>
+<!-- Title on top -->
+<h1 id="game-title">💘 Catch The Flying Hearts 💘</h1>
 
-<!-- iPhone-style game box -->
+<!-- Square iPhone-style game box -->
 <div id="game-container">
-  <div id="score">Score: 0</div>
-  <div id="basket">🧺</div>
-  <div id="game-over">
-    🎉 You caught all hearts! 🎉
-    <br>
-    <button id="okGameOver">Okay 💗</button>
-  </div>
+    <div id="score">Score: 0</div>
+    <div id="basket">🧺</div>
+    <div id="game-over">
+        🎉 You caught all hearts! 🎉
+        <br>
+        <button id="okGameOver">Okay 💗</button>
+    </div>
 </div>
 
-<!-- Back button below the game box -->
+<!-- Back button directly below the box -->
 <div class="back-button-container">
-  <button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
-</div>
-
-<!-- Controls -->
-<div id="controls">
-  <button id="pauseBtn">Pause</button>
-  <button id="instructionsBtn">Instructions</button>
+    <button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
 </div>
 
 <!-- Instructions overlay -->
 <div id="instructions-overlay">
-  <div id="instructions">
-    <h2>💘 Catch The Flying Hearts 💘</h2>
-    <p>Move the basket to catch 💗 hearts falling from the sky!<br>
-       Each heart = 1 point. Catch 20 hearts to win! 💖</p>
-    <button id="startGame">Okay! 💗</button>
-  </div>
+    <div id="instructions">
+        <h2>💘 Catch The Flying Hearts 💘</h2>
+        <p>Move the basket to catch 💗 hearts falling from the sky!<br>
+        Each heart = 1 point. Catch 20 hearts to win! 💖</p>
+        <button id="startGame">Okay 💗</button>
+    </div>
 </div>
 
 <script src="../js/catch-hearts.js"></script>
