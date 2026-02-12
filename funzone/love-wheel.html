@@ -1,52 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Love Wheel</title>
-
-<link rel="stylesheet" href="../css/wheel-game.css">
+<title>Love Fortune</title>
+<link rel="stylesheet" href="../css/love-fortune.css">
 </head>
 
 <body>
 
-<h1 class="title">🎡 Spin The Love Wheel 💗</h1>
+<h1>💖 Love Fortune Cards 💖</h1>
 
 <div class="game-box">
 
-<button id="spinBtn">SPIN 💞</button>
+<div class="card" id="card">
+Click Draw Card 💌
+</div>
 
-<div class="wheel-wrapper">
-
-<div class="pointer"></div>
-
-<div class="wheel" id="wheel">
-
-<span style="--i:0">Selfie 📸</span>
-<span style="--i:1">Compliments ❤️</span>
-<span style="--i:2">Cute Photo 🌸</span>
-<span style="--i:3">Draw Heart 💗</span>
-<span style="--i:4">Love Note 💌</span>
-<span style="--i:5">TRY AGAIN</span>
+<button id="drawBtn">Draw Card 💕</button>
 
 </div>
 
-</div>
+<a href="../menu.html" class="back">← Back</a>
 
-</div>
+<audio id="cardSound" src="../assets/sounds/tick.mp3"></audio>
 
-<button class="back-btn"
-onclick="location.href='../funzone.html'">
-⬅ Back
-</button>
-
-<div class="popup" id="popup">
-<div class="popup-box">
-<div id="dareText"></div>
-<button onclick="closePopup()">Okay 💗</button>
-</div>
-</div>
-
-<script src="../js/wheel-game.js"></script>
+<script src="../js/love-fortune.js"></script>
 
 </body>
 </html>
