@@ -1,13 +1,14 @@
-let hearts = [], score = 0, gamePaused = false, basketX = 150; // initial middle
+let hearts = [], score = 0, gamePaused = false, basketX = 150;
 const maxScore = 20;
 
 const container = document.getElementById('game-container');
 const basket = document.getElementById('basket');
 const scoreEl = document.getElementById('score');
 const gameOver = document.getElementById('game-over');
+const okGameOverBtn = document.getElementById('okGameOver');
 const instructionsOverlay = document.getElementById('instructions-overlay');
 
-// Create heart
+// Create hearts
 function createHeart(){
   if(score >= maxScore) return;
 
@@ -28,6 +29,7 @@ function createHeart(){
 // Basket movement
 function moveBasket(e){
   if(gamePaused) return;
+  e.preventDefault(); // prevent page scroll on mobile
   const rect = container.getBoundingClientRect();
   const x = e.touches ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
   basketX = x - 30;
@@ -97,7 +99,7 @@ function updateHearts(){
 
 // Start game
 function startHeartsGame(){
-  instructionsOverlay.style.display = 'none';  // hide overlay
+  instructionsOverlay.style.display = 'none';
   container.classList.remove('blurred');
   setInterval(createHeart, 1200);
   requestAnimationFrame(updateHearts);
@@ -115,7 +117,16 @@ document.getElementById('instructionsBtn').addEventListener('click', ()=>{
   instructionsOverlay.style.display = 'flex';
 });
 
+// Basket movement with mouse/touch
 container.addEventListener('mousemove', moveBasket);
-container.addEventListener('touchmove', moveBasket);
+container.addEventListener('touchmove', moveBasket, {passive:false}); // prevent page scroll
 
-initGame('game-container', startHeartsGame);
+// Game over OK button
+okGameOverBtn.addEventListener('click', ()=>{
+  gameOver.style.display='none';
+  hearts.forEach(h=>container.removeChild(h));
+  hearts=[];
+  score=0;
+  scoreEl.innerText='Score: 0';
+  instructionsOverlay.style.display='flex';
+});
