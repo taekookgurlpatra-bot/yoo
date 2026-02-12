@@ -644,3 +644,66 @@ transform:scale(1.05);
     cursor:pointer;
 }
 #game-over button:hover { transform:scale(1.05); }
+
+/* ---------- Spin The Love Wheel Styles --------- */
+
+#spinBtn {
+    font-size: 20px;
+    padding: 12px 25px;
+    border-radius: 20px;
+    border: none;
+    background: #90dbf4;
+    color: #204e7a;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#spinBtn:hover { transform: scale(1.05); }
+
+#wheel-dare {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #b03060;
+    text-align: center;
+}
+
+/* Dare Box (iPhone-style square) */
+#dare-box {
+    width: 360px;
+    max-width: 90vw;
+    background: linear-gradient(135deg,#ffe4ec,#ffc2db);
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+#dare-text {
+    font-size: 18px;
+    font-weight: bold;
+    color:#6b216b;
+}
+
+#dare-instructions {
+    font-size: 14px;
+    font-style: italic;
+    color:#b03060;
+    text-align: left;
+    width: 90%;
+}
+
+#okDare {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    background: #ff8fab;
+    color: white;
+    cursor: pointer;
+}
+#okDare:hover { transform: scale(1.05); }
