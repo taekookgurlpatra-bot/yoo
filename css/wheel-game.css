@@ -11,79 +11,42 @@ margin-top:30px;
 
 .game-box{
 width:300px;
-height:420px;
+height:380px;
 background:#eee;
 margin:40px auto;
 border-radius:25px;
 box-shadow:0 0 20px rgba(0,0,0,0.1);
-padding-top:20px;
-position:relative;
+padding-top:40px;
 }
 
-/* SPIN BUTTON */
+.card{
+width:200px;
+height:150px;
+background:white;
+margin:0 auto 30px;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+font-size:18px;
+transition:0.4s;
+box-shadow:0 0 10px rgba(0,0,0,0.15);
+}
 
-#spinBtn{
-padding:12px 40px;
+.card.flip{
+transform:scale(1.1) rotateY(360deg);
+}
+
+button{
+padding:12px 35px;
 background:#f47c9b;
 border:none;
 border-radius:30px;
 color:white;
-font-size:18px;
+font-size:16px;
 cursor:pointer;
-margin-bottom:20px;
 }
-
-/* POINTER */
-
-.pointer{
-width:0;
-height:0;
-border-left:15px solid transparent;
-border-right:15px solid transparent;
-border-bottom:25px solid #ff4f7b;
-margin:10px auto;
-}
-
-/* WHEEL */
-
-.wheel{
-width:220px;
-height:220px;
-border-radius:50%;
-margin:0 auto;
-position:relative;
-
-background:conic-gradient(
-#f4c2c2 0deg 60deg,
-#c2d4f4 60deg 120deg,
-#d4c2f4 120deg 180deg,
-#c2f4d6 180deg 240deg,
-#f4e1c2 240deg 300deg,
-#f4c2e2 300deg 360deg
-);
-
-transition:transform 14s cubic-bezier(0.1,0.7,0.1,1);
-}
-
-/* TEXT INSIDE WHEEL */
-
-.wheel span{
-position:absolute;
-left:50%;
-top:50%;
-transform-origin:0 0;
-
-transform:
-rotate(calc(var(--i)*60deg))
-translate(85px)
-rotate(90deg);
-
-font-size:13px;
-font-weight:bold;
-color:#444;
-}
-
-/* BACK BUTTON */
 
 .back{
 display:inline-block;
