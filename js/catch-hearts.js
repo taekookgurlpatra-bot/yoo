@@ -1,5 +1,6 @@
 let hearts = [], score = 0, gamePaused = false, basketX = 150;
 const maxScore = 20;
+const fallSpeed = 2.2; // increased for moderate speed
 
 const container = document.getElementById('game-container');
 const basket = document.getElementById('basket');
@@ -63,7 +64,7 @@ function updateHearts(){
   if(gamePaused) return;
   hearts.forEach((heart,i)=>{
     let top = parseFloat(heart.style.top);
-    top += 1.2;
+    top += fallSpeed; // faster speed
     heart.style.top = top+'px';
 
     const heartX = parseFloat(heart.style.left);
@@ -101,7 +102,7 @@ function updateHearts(){
 function startHeartsGame(){
   instructionsOverlay.style.display = 'none';
   container.classList.remove('blurred');
-  setInterval(createHeart, 1200);
+  setInterval(createHeart, 1000); // slightly faster heart generation
   requestAnimationFrame(updateHearts);
 }
 
@@ -119,7 +120,7 @@ document.getElementById('instructionsBtn').addEventListener('click', ()=>{
 
 // Basket movement with mouse/touch
 container.addEventListener('mousemove', moveBasket);
-container.addEventListener('touchmove', moveBasket, {passive:false}); // prevent page scroll
+container.addEventListener('touchmove', moveBasket, {passive:false});
 
 // Game over OK button
 okGameOverBtn.addEventListener('click', ()=>{
