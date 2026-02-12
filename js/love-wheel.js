@@ -1,76 +1,29 @@
 const wheel = document.getElementById("wheel");
 const spinBtn = document.getElementById("spinBtn");
-const popup = document.getElementById("popup");
-const dareText = document.getElementById("dareText");
+const sound = document.getElementById("spinSound");
 
-const tickSound = new Audio("../assets/sounds/tick.mp3");
-
-let rotation = 0;
-
-const dares = [
-"Take a cute selfie 📸",
-"Give 5 compliments ❤️",
-"Send a cute photo 🌸",
-"Draw a heart 💗",
-"Write a love note 💌",
-"TRY AGAIN"
-];
+let spinning = false;
 
 spinBtn.onclick = () => {
 
-spinBtn.disabled = true;
+if(spinning) return;
 
-tickSound.currentTime = 0;
-tickSound.volume = 1;
-tickSound.play().catch(()=>{});
+spinning = true;
 
-const index = Math.floor(Math.random()*dares.length);
+/* RANDOM ROTATION */
+let randomDeg = 3600 + Math.floor(Math.random()*360);
 
-const segment = 360/dares.length;
-const spins = 6;
+/* APPLY SPIN */
+wheel.style.transform = `rotate(${randomDeg}deg)`;
 
-rotation += 360*spins + index*segment;
+/* PLAY SOUND */
+sound.currentTime = 0;
+sound.play();
 
-wheel.style.transform = `rotate(${rotation}deg)`;
-
-/* sound fade after 5 sec */
+/* STOP SOUND AFTER 14 SEC */
 setTimeout(()=>{
-let fade = setInterval(()=>{
-if(tickSound.volume > 0.1){
-tickSound.volume -= 0.05;
-}else{
-clearInterval(fade);
-}
-},300);
-},5000);
-
-/* popup */
-setTimeout(()=>{
-
-tickSound.pause();
-
-popup.style.display="flex";
-
-if(dares[index] === "TRY AGAIN"){
-dareText.innerHTML="<h2>TRY AGAIN !!</h2>";
-}
-else{
-dareText.innerHTML=`
-<h2>${dares[index]}</h2>
-<p>
-1. Screenshot 🤭<br>
-2. DO IT !! 😡😡<br>
-3. Send to Debu 🤭✨
-</p>
-`;
-}
-
-spinBtn.disabled=false;
-
+sound.pause();
+spinning = false;
 },14000);
 
 };
-
-function closePopup(){
-popup.style.display="none";
-}
