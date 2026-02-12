@@ -21,6 +21,7 @@ spinBtn.onclick = () => {
 spinBtn.disabled = true;
 
 tickSound.currentTime = 0;
+tickSound.volume = 1;
 tickSound.play().catch(()=>{});
 
 const randomIndex = Math.floor(Math.random()*dares.length);
