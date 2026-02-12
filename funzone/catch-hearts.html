@@ -124,9 +124,9 @@ body {
 #controls button { padding:6px 10px; border-radius:10px; cursor:pointer; background:#d8b4fe; color:white; border:none; font-weight:600; font-size:14px; transition:0.3s; }
 #controls button:hover { transform:scale(1.05); }
 
-/* Back button directly below game box */
+/* Back button fixed at the bottom of the page */
 #backBtn {
-  margin-top:15px;
+  margin-top:auto; /* pushes it to the bottom */
   padding:12px 25px;
   font-size:18px;
   border:none;
@@ -135,9 +135,12 @@ body {
   color:white;
   cursor:pointer;
   transition:0.3s;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 #backBtn:hover { transform:scale(1.05); }
-
 </style>
 </head>
 <body>
@@ -156,9 +159,6 @@ body {
   </div>
 </div>
 
-<!-- Back button immediately below the game box -->
-<button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
-
 <!-- Controls -->
 <div id="controls">
   <button id="pauseBtn">Pause</button>
@@ -175,6 +175,9 @@ body {
     <button id="startGame">Okay! 💗</button>
   </div>
 </div>
+
+<!-- Back button fixed at the bottom of page -->
+<button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
 
 <script src="../js/game-common.js"></script>
 <script src="../js/catch-hearts.js"></script>
