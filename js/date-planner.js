@@ -1,4 +1,3 @@
-// 10 playful LDR Valentine questions
 const questions = [
   { q: "Favorite way to spend time together online?", a:["Voice call 🎤","Play games 🎮","Watch movie 🎬","Chat randomly 💌"] },
   { q: "Preferred weather for a date?", a:["Sunny 🌞","Rainy 🌧️","Snowy ❄️","Starry 🌌"] },
@@ -9,7 +8,7 @@ const questions = [
   { q: "Pick a surprise gift.", a:["Flowers 🌹","Letter 💌","Teddy 🧸","Chocolates 🍫"] },
   { q: "Best time?", a:["Morning 🌞","Afternoon 🌼","Evening 🌇","Night 🌙"] },
   { q: "Cute element?", a:["Candles 🕯️","Fairy lights ✨","Balloon 🎈","Confetti 🎉"] },
-  { q: "Sweet memory to relive?", a:["First video call 📱","First text 💌","First gift 🎁","First joke 😂"] }
+  { q: "Sweet memory to relive?", a:["First voice call 🎤","First text 💌","First gift 🎁","First joke 😂"] }
 ];
 
 const datePlans = [
@@ -29,7 +28,6 @@ function startDatePlanner() {
 
 function showQuestion() {
   if(currentQ >= questions.length) return showResult();
-  if(gamePaused) return setTimeout(showQuestion, 100);
 
   let q = questions[currentQ];
   document.getElementById('question').innerText = q.q;
