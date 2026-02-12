@@ -1,7 +1,7 @@
-body{
+xbody{
 margin:0;
-background:linear-gradient(135deg,#ffd6e7,#ffc2db);
 font-family:Poppins, sans-serif;
+background:linear-gradient(135deg,#ffd6e7,#ffc2db);
 text-align:center;
 }
 
@@ -10,21 +10,22 @@ text-align:center;
 .title{
 margin-top:25px;
 font-size:32px;
+font-weight:bold;
 color:#d63384;
 }
 
 /* GAME BOX */
 
 .game-box{
-width:300px;
-height:420px;
+width:320px;
+height:430px;
 background:white;
 margin:30px auto;
-border-radius:25px;
+border-radius:30px;
 box-shadow:0 6px 18px rgba(0,0,0,0.15);
 padding:25px;
 display:flex;
-flex-direction:column;
+align-items:center;
 justify-content:center;
 }
 
@@ -32,7 +33,7 @@ justify-content:center;
 
 #question{
 color:#b03060;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
 /* OPTIONS */
@@ -77,61 +78,57 @@ border-radius:25px;
 text-align:center;
 }
 
-.popup-box h2{
-color:#d63384;
+.hidden{
+display:none;
 }
 
-.popup-box p{
-color:#b03060;
-margin-bottom:20px;
+/* POPUP BUTTON ROW */
+
+.btn-row{
+margin-top:15px;
 }
 
-.popup-box button{
+/* PLAY AGAIN BUTTON */
+
+.play-btn{
 padding:12px 22px;
 margin:8px;
 border:none;
 border-radius:30px;
 font-size:15px;
 cursor:pointer;
-transition:0.3s;
-font-weight:600;
-}
-
-/* Play Again Button */
-
-.popup-box button:first-of-type{
 background:linear-gradient(135deg,#ff9ecf,#ff6fa5);
 color:white;
 box-shadow:0 4px 10px rgba(255,111,165,0.4);
+transition:0.3s;
 }
 
-.popup-box button:first-of-type:hover{
+.play-btn:hover{
 transform:scale(1.08);
-background:linear-gradient(135deg,#ff6fa5,#ff4d94);
 }
 
-/* Back Button */
+/* BACK BUTTON IN POPUP */
 
-.popup-box button:last-of-type{
+.back-btn-popup{
+padding:12px 22px;
+margin:8px;
+border:none;
+border-radius:30px;
+font-size:15px;
+cursor:pointer;
 background:linear-gradient(135deg,#cdb4db,#b8a2d9);
 color:white;
 box-shadow:0 4px 10px rgba(180,162,217,0.4);
+transition:0.3s;
 }
 
-.popup-box button:last-of-type:hover{
+.back-btn-popup:hover{
 transform:scale(1.08);
-background:linear-gradient(135deg,#b8a2d9,#9f86c0);
 }
 
-/* HIDE */
+/* MAIN BACK BUTTON */
 
-.hidden{
-display:none;
-}
-
-/* BACK BUTTON */
-
-.back-btn{
+.main-back-btn{
 display:inline-block;
 margin-top:10px;
 padding:10px 25px;
