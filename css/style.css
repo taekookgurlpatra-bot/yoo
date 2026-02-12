@@ -533,7 +533,7 @@ transform:scale(1.05);
   position: relative;
   overflow: hidden;
   border: 3px solid #ffb6c1;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
 }
 
 /* Basket */
@@ -648,9 +648,8 @@ transform:scale(1.05);
   width: 100%;
   display:flex;
   justify-content:center;
-  margin-bottom:40px; /* space from bottom */
+  margin-bottom:40px; 
 }
-
 #backBtn {
   padding:12px 25px;
   font-size:18px;
