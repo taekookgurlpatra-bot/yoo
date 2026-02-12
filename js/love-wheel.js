@@ -18,16 +18,56 @@ const submitDare = document.getElementById("submitDare");
 let wheelSpinning = false;
 
 function spinWheel() {
-  if(wheelSpinning) return;
-  wheelSpinning = true;
-  const spinDeg = Math.floor(Math.random()*360) + 720; // 2+ spins
-  wheel.style.transition = "transform 4s cubic-bezier(0.33,1,0.68,1)";
-  wheel.style.transform = `rotate(${spinDeg}deg)`;
+  if(window.wheelSpinning) return;
+  window.wheelSpinning = true;
 
-  setTimeout(()=> {
-    wheelSpinning = false;
-    showDare(spinDeg);
-  },4000);
+  const totalRotation = Math.floor(Math.random() * 360) + 720; // 2+ spins
+  const startRotation = rotation;
+  const duration = 4000; // 4 seconds spin
+  const startTime = performance.now();
+
+  function animate(time){
+    let elapsed = time - startTime;
+    if(elapsed > duration) elapsed = duration;
+
+    // Ease out cubic
+    const progress = 1 - Math.pow(1 - elapsed/duration, 3);
+    rotation = startRotation + totalRotation * progress;
+
+    wheelCanvas.style.transform = `rotate(${rotation}deg)`;
+
+    // Tick-tick effect: play a small "tick" when crossing segment borders
+    const segAngle = 360 / segments.length;
+    const prevTickIndex = Math.floor(startRotation/segAngle);
+    const currentTickIndex = Math.floor(rotation/segAngle);
+    if(currentTickIndex != prevTickIndex){
+      // Play a small tick sound or just log for now
+      // Example: console.log("tick");
+      startRotation = rotation; // update for next tick
+    }
+
+    if(elapsed < duration){
+      requestAnimationFrame(animate);
+    } else {
+      window.wheelSpinning=false;
+      // Determine final segment
+      const index = segments.length - 1 - Math.floor((rotation%360)/(360/segments.length));
+      const dare = window.dares[index>=segments.length?0:index];
+      document.getElementById('dare-title').innerText=dare.title;
+      document.getElementById('dare-desc').innerText=dare.desc;
+      document.getElementById('dare-overlay').style.display="block";
+      document.getElementById('dare-input').style.display=dare.type==="text"?"block":"none";
+      const canvas = document.getElementById('dare-canvas');
+      canvas.style.display=dare.type==="draw"?"block":"none";
+      if(dare.type==="draw") {
+        const c = canvas.getContext('2d');
+        c.clearRect(0,0,canvas.width,canvas.height);
+        window.setupDrawing(canvas,c);
+      }
+    }
+  }
+
+  requestAnimationFrame(animate);
 }
 
 function showDare(deg){
