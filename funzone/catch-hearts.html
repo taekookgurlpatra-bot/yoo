@@ -16,6 +16,16 @@ body {
   margin:0;
   padding:20px 0;
   overflow-x:hidden;
+  text-align:center;
+}
+
+/* Game title */
+#game-title {
+  font-size:32px;
+  font-weight:bold;
+  color:#d63384;
+  margin-bottom:20px;
+  font-family:'Dancing Script', cursive;
 }
 
 /* iPhone-style game box */
@@ -29,7 +39,7 @@ body {
   position: relative;
   overflow: hidden;
   border: 3px solid #ffb6c1;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 /* Basket */
@@ -114,7 +124,7 @@ body {
 #controls button { padding:6px 10px; border-radius:10px; cursor:pointer; background:#d8b4fe; color:white; border:none; font-weight:600; font-size:14px; transition:0.3s; }
 #controls button:hover { transform:scale(1.05); }
 
-/* Back button below the box */
+/* Back button under the box */
 #backBtn {
   display:block;
   margin:0 auto 30px auto;
@@ -131,6 +141,9 @@ body {
 </style>
 </head>
 <body>
+
+<!-- Game title -->
+<div id="game-title">💘 Catch The Flying Hearts 💘</div>
 
 <!-- iPhone-style game box -->
 <div id="game-container">
@@ -160,7 +173,7 @@ body {
   <button id="instructionsBtn">Instructions</button>
 </div>
 
-<!-- Back button below the box -->
+<!-- Back button directly below the game box -->
 <button id="backBtn" onclick="window.location.href='../funzone.html'">⬅ Back</button>
 
 <script src="../js/game-common.js"></script>
