@@ -1,7 +1,7 @@
 const questions = [
 
 {
-q:"Choose Date Type 💕",
+question:"Choose Date Type 💕",
 options:[
 "Movie Night 🎬",
 "Romantic Dinner 🍝",
@@ -11,7 +11,7 @@ options:[
 },
 
 {
-q:"Pick Food 🍰",
+question:"Pick Food 🍰",
 options:[
 "Pizza 🍕",
 "Ice Cream 🍦",
@@ -21,12 +21,32 @@ options:[
 },
 
 {
-q:"Choose Activity 🎀",
+question:"Choose Outfit Style 👗",
+options:[
+"Casual Cute 🌸",
+"Elegant Romantic 💃",
+"Comfy Cozy 🧸",
+"Matching Outfit 💞"
+]
+},
+
+{
+question:"Choose Activity 🎀",
 options:[
 "Watch Stars ✨",
 "Play Games 🎮",
 "Listen Music 🎧",
 "Talk About Memories 💌"
+]
+},
+
+{
+question:"Choose Ending Moment 💖",
+options:[
+"Virtual Hug 🤗",
+"Sweet Compliments ❤️",
+"Flirty Teasing 😏",
+"Deep Emotional Talk 🌙"
 ]
 }
 
@@ -35,23 +55,23 @@ options:[
 let currentQuestion = 0;
 let score = 0;
 
-const questionText = document.getElementById("question");
-const optionsBox = document.getElementById("options");
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
 const popup = document.getElementById("resultPopup");
-const resultText = document.getElementById("resultText");
+const resultTitle = document.getElementById("resultTitle");
 const resultRemark = document.getElementById("resultRemark");
 
 function loadQuestion(){
 
 let q = questions[currentQuestion];
 
-questionText.innerText = q.q;
-optionsBox.innerHTML = "";
+questionEl.innerText = q.question;
+optionsEl.innerHTML = "";
 
-q.options.forEach((opt,index)=>{
+q.options.forEach((option,index)=>{
 
 let btn = document.createElement("button");
-btn.innerText = opt;
+btn.innerText = option;
 btn.classList.add("option-btn");
 
 btn.onclick = ()=>{
@@ -59,9 +79,10 @@ score += index + 1;
 nextQuestion();
 };
 
-optionsBox.appendChild(btn);
+optionsEl.appendChild(btn);
 
 });
+
 }
 
 function nextQuestion(){
@@ -70,8 +91,7 @@ currentQuestion++;
 
 if(currentQuestion < questions.length){
 loadQuestion();
-}
-else{
+}else{
 showResult();
 }
 
@@ -81,42 +101,38 @@ function showResult(){
 
 popup.classList.remove("hidden");
 
-/* RESULT CATEGORY */
+if(score <= 10){
 
-if(score <= 6){
-
-resultText.innerText = "✨ Sweet & Simple Date ✨";
+resultTitle.innerText = "✨ Sweet Cozy Date ✨";
 resultRemark.innerText =
-"Your date vibe is calm, cute and cozy 🧸💕 Perfect for heart-to-heart talks and warm smiles 🫶🌙";
+"Your date vibe is soft, warm and full of comfort 🧸💕 Perfect for emotional talks and peaceful bonding 🌙💞";
 
 }
 
-else if(score <= 9){
+else if(score <= 15){
 
-resultText.innerText = "💖 Romantic Dream Date 💖";
+resultTitle.innerText = "💖 Romantic Dream Date 💖";
 resultRemark.innerText =
-"OMG this date is giving butterflies 🦋❤️ Soft romance, laughter and magical moments together ✨🥰";
+"This date is giving butterflies and magical moments 🦋❤️ Full romantic energy and sweet memories together ✨🥰";
 
 }
 
 else{
 
-resultText.innerText = "🔥 Passionate Fun Date 🔥";
+resultTitle.innerText = "🔥 Passionate Fun Date 🔥";
 resultRemark.innerText =
-"This date is FULL energy 😍🎉 Lots of excitement, teasing, fun and unforgettable memories 💞💫";
+"This date is exciting and playful 😍🎉 Lots of teasing, laughter and unforgettable romantic chaos 💞💫";
 
 }
 
 }
-
-/* Buttons */
 
 function restartGame(){
 location.reload();
 }
 
 function goBack(){
-window.location.href = "../funzone.html";
+window.location.href="../funzone.html";
 }
 
 loadQuestion();
