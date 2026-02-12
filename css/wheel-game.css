@@ -1,102 +1,138 @@
 body{
 margin:0;
 background:linear-gradient(135deg,#ffe4ec,#ffc2db);
+font-family:Poppins, sans-serif;
 display:flex;
 flex-direction:column;
 align-items:center;
-font-family:Poppins,sans-serif;
 }
 
-.game-title{
-margin-top:25px;
-font-size:32px;
-font-weight:bold;
+/* Title */
+.title{
 color:#d63384;
+margin-top:20px;
 }
 
+/* Main Game Box */
 .game-box{
-margin-top:20px;
+background:white;
 width:320px;
 height:420px;
-background:white;
-border-radius:35px;
-box-shadow:0 0 20px rgba(0,0,0,0.15);
+margin-top:20px;
+border-radius:30px;
 display:flex;
 flex-direction:column;
 align-items:center;
-justify-content:flex-start;
-padding-top:25px;
+padding-top:20px;
+box-shadow:0 0 20px rgba(0,0,0,0.2);
 }
 
-#wheel{
-width:240px;
-transition:transform 14s cubic-bezier(0.15,0.85,0.25,1);
-}
-
-.wheel-container{
-position:relative;
-margin-top:20px;
-}
-
-.pointer{
-position:absolute;
-top:-15px;
-left:50%;
-transform:translateX(-50%);
-width:0;
-height:0;
-border-left:14px solid transparent;
-border-right:14px solid transparent;
-border-bottom:24px solid #ff4d6d;
-z-index:10;
-}
-
+/* Spin Button */
 #spinBtn{
-padding:12px 28px;
+padding:12px 30px;
 border:none;
 border-radius:25px;
 background:#ff8fab;
 color:white;
 font-size:18px;
 cursor:pointer;
+transition:0.3s;
 }
 
+#spinBtn:hover{
+background:#ff6f9f;
+}
+
+/* Wheel Container */
+.wheel-wrapper{
+position:relative;
+margin-top:20px;
+}
+
+/* Wheel */
+.wheel{
+width:250px;
+height:250px;
+border-radius:50%;
+background:conic-gradient(
+#ffd6e0 0deg 60deg,
+#cdb4db 60deg 120deg,
+#bde0fe 120deg 180deg,
+#caffbf 180deg 240deg,
+#ffe5b4 240deg 300deg,
+#ffc8dd 300deg 360deg
+);
+display:flex;
+justify-content:center;
+align-items:center;
+
+/* 14 sec spin animation */
+transition:transform 14s cubic-bezier(0.15,0.85,0.25,1);
+}
+
+/* (Hidden text segments - used by JS logic only) */
+.segment{
+display:none;
+}
+
+/* Pointer Arrow */
+.pointer{
+position:absolute;
+top:-12px;
+left:50%;
+transform:translateX(-50%);
+border-left:12px solid transparent;
+border-right:12px solid transparent;
+border-bottom:22px solid #ff4d6d;
+}
+
+/* Back Button */
 .back-btn{
-margin-top:25px;
+margin-top:20px;
 padding:12px 25px;
 border:none;
 border-radius:25px;
 background:#cdb4db;
 color:white;
 cursor:pointer;
+transition:0.3s;
 }
 
+.back-btn:hover{
+background:#b497d6;
+}
+
+/* Popup Background */
 .popup{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.5);
 display:none;
 justify-content:center;
 align-items:center;
+background:rgba(0,0,0,0.5);
 }
 
+/* Popup Box */
 .popup-box{
 background:white;
 padding:25px;
 border-radius:25px;
 text-align:center;
 width:260px;
+animation:pop 0.4s ease;
 }
 
-.popup-box button{
-margin-top:15px;
-padding:10px 20px;
-border:none;
-border-radius:20px;
-background:#ff8fab;
-color:white;
-cursor:pointer;
+/* Popup Animation */
+@keyframes pop{
+from{
+transform:scale(0.7);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
 }
