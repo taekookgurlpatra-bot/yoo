@@ -57,6 +57,7 @@ let score = 0;
 
 const questionEl = document.getElementById("question");
 const optionsEl = document.getElementById("options");
+
 const popup = document.getElementById("resultPopup");
 const resultTitle = document.getElementById("resultTitle");
 const resultRemark = document.getElementById("resultRemark");
@@ -82,7 +83,6 @@ nextQuestion();
 optionsEl.appendChild(btn);
 
 });
-
 }
 
 function nextQuestion(){
@@ -94,7 +94,6 @@ loadQuestion();
 }else{
 showResult();
 }
-
 }
 
 function showResult(){
@@ -105,26 +104,23 @@ if(score <= 10){
 
 resultTitle.innerText = "✨ Sweet Cozy Date ✨";
 resultRemark.innerText =
-"Your date vibe is soft, warm and full of comfort 🧸💕 Perfect for emotional talks and peaceful bonding 🌙💞";
+"Soft, warm and comforting vibes 🧸💕 Perfect for peaceful bonding and heartfelt talks 🌙";
 
 }
-
 else if(score <= 15){
 
 resultTitle.innerText = "💖 Romantic Dream Date 💖";
 resultRemark.innerText =
-"This date is giving butterflies and magical moments 🦋❤️ Full romantic energy and sweet memories together ✨🥰";
+"Butterflies, magic and adorable romantic energy 🦋❤️ Full dreamy memories together ✨";
 
 }
-
 else{
 
 resultTitle.innerText = "🔥 Passionate Fun Date 🔥";
 resultRemark.innerText =
-"This date is exciting and playful 😍🎉 Lots of teasing, laughter and unforgettable romantic chaos 💞💫";
+"Playful, exciting and full of teasing laughter 😍🎉 A chaotic but unforgettable love vibe 💞";
 
 }
-
 }
 
 function restartGame(){
