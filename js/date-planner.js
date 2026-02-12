@@ -1,65 +1,122 @@
-// Plan Our Perfect Date Game
-const questions=[
-{q:"Favorite way to spend time together online?",a:["Voice call 🎤","Play games 🎮","Watch movie 🎬","Chat randomly 💌"]},
-{q:"Preferred weather for a date?",a:["Sunny 🌞","Rainy 🌧️","Snowy ❄️","Starry 🌌"]},
-{q:"Pick a color theme for our date.",a:["Red ❤️","Pink 💗","Lavender 💜","Gold ✨"]},
-{q:"Food for our date?",a:["Chocolate 🍫","Pizza 🍕","Ice cream 🍦","Sushi 🍣"]},
-{q:"Fun activity?",a:["Beach walk 🏖️","Movie night 🎥","Picnic 🧺","Stargazing ✨"]},
-{q:"Music for the date?",a:["Romantic 🎵","Pop 🎶","Jazz 🎷","Silence 🌙"]},
-{q:"Pick a surprise gift.",a:["Flowers 🌹","Letter 💌","Teddy 🧸","Chocolates 🍫"]},
-{q:"Best time?",a:["Morning 🌞","Afternoon 🌼","Evening 🌇","Night 🌙"]},
-{q:"Cute element?",a:["Candles 🕯️","Fairy lights ✨","Balloon 🎈","Confetti 🎉"]},
-{q:"Sweet memory to relive?",a:["First voice call 🎤","First text 💌","First gift 🎁","First joke 😂"]}
-];
+const questions = [
 
-const datePlans=[
-{name:"Beach Date 🏖️",desc:"Grab snacks and a blanket, enjoy waves & sunset together."},
-{name:"Movie Night 🎥",desc:"Snuggle up with your favorite film and popcorn."},
-{name:"Picnic 🧺",desc:"Spread a blanket, enjoy treats and talk under the sky."},
-{name:"Stargazing ✨",desc:"Lay back, gaze at stars, share secrets and dreams."}
-];
+{
+q:"Choose Date Type 💕",
+options:[
+"Movie Night 🎬",
+"Romantic Dinner 🍝",
+"Long Walk 🌙",
+"Voice Call ☎️"
+]
+},
 
-let answers=[],currentQ=0,gamePaused=false;
+{
+q:"Pick Food 🍰",
+options:[
+"Pizza 🍕",
+"Ice Cream 🍦",
+"Pasta 🍝",
+"Chocolate 🍫"
+]
+},
 
-function startDatePlanner(){
-  document.getElementById('question-container').style.display='block';
-  document.getElementById('instructions').style.display='none';
-  showQuestion();
+{
+q:"Choose Activity 🎀",
+options:[
+"Watch Stars ✨",
+"Play Games 🎮",
+"Listen Music 🎧",
+"Talk About Memories 💌"
+]
 }
 
-function showQuestion(){
-  if(currentQ>=questions.length) return showResult();
-  const q=questions[currentQ];
-  document.getElementById('question').innerText=q.q;
-  for(let i=0;i<4;i++){
-    const btn=document.getElementById('opt'+i);
-    btn.innerText=q.a[i];
-    btn.onclick=()=>{
-      answers.push(i);
-      currentQ++;
-      showQuestion();
-    };
-  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const questionText = document.getElementById("question");
+const optionsBox = document.getElementById("options");
+const popup = document.getElementById("resultPopup");
+const resultText = document.getElementById("resultText");
+const resultRemark = document.getElementById("resultRemark");
+
+function loadQuestion(){
+
+let q = questions[currentQuestion];
+
+questionText.innerText = q.q;
+optionsBox.innerHTML = "";
+
+q.options.forEach((opt,index)=>{
+
+let btn = document.createElement("button");
+btn.innerText = opt;
+btn.classList.add("option-btn");
+
+btn.onclick = ()=>{
+score += index + 1;
+nextQuestion();
+};
+
+optionsBox.appendChild(btn);
+
+});
+}
+
+function nextQuestion(){
+
+currentQuestion++;
+
+if(currentQuestion < questions.length){
+loadQuestion();
+}
+else{
+showResult();
+}
+
 }
 
 function showResult(){
-  document.getElementById('question-container').style.display='none';
-  document.getElementById('result-container').style.display='block';
-  let sum=answers.reduce((a,b)=>a+b,0);
-  let planIndex=sum%datePlans.length;
-  let plan=datePlans[planIndex];
-  document.getElementById('result-title').innerText=plan.name;
-  document.getElementById('result-desc').innerText=plan.desc;
+
+popup.classList.remove("hidden");
+
+/* RESULT CATEGORY */
+
+if(score <= 6){
+
+resultText.innerText = "✨ Sweet & Simple Date ✨";
+resultRemark.innerText =
+"Your date vibe is calm, cute and cozy 🧸💕 Perfect for heart-to-heart talks and warm smiles 🫶🌙";
+
 }
 
-document.getElementById('pauseBtn').addEventListener('click',()=>{
-  gamePaused=!gamePaused;
-  document.getElementById('pauseBtn').innerText=gamePaused?'Play':'Pause';
-});
+else if(score <= 9){
 
-document.getElementById('instructionsBtn').addEventListener('click',()=>{
-  document.getElementById('instructions').style.display='block';
-  document.getElementById('planner-background').classList.add('blurred');
-});
+resultText.innerText = "💖 Romantic Dream Date 💖";
+resultRemark.innerText =
+"OMG this date is giving butterflies 🦋❤️ Soft romance, laughter and magical moments together ✨🥰";
 
-initGame('planner-background', startDatePlanner);
+}
+
+else{
+
+resultText.innerText = "🔥 Passionate Fun Date 🔥";
+resultRemark.innerText =
+"This date is FULL energy 😍🎉 Lots of excitement, teasing, fun and unforgettable memories 💞💫";
+
+}
+
+}
+
+/* Buttons */
+
+function restartGame(){
+location.reload();
+}
+
+function goBack(){
+window.location.href = "../funzone.html";
+}
+
+loadQuestion();
